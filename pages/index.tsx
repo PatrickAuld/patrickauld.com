@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Img from 'next/image'
 
-function TextStatement(props) {
+function TextStatement(props: { children: React.ReactNode }) {
   return (
     <p className="mt-1 max-w-2xl text-lg text-gray-700 pb-2">
       {props.children}
