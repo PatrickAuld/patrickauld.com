@@ -31,10 +31,10 @@ export default function Home() {
       <main >
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 h-screen content-center">
-            <div className="max-h-800 overflow-x-hidden">
+            <div className="max-w-800 overflow-x-hidden">
               <Img width="800" height="800" className="w-auto h-auto object-center" src="/profile.jpeg" alt="Profile Headshot" />
             </div>
-            <div className="flex bg-gray-100 p-10">
+            <div className="flex bg-gray-100 p-10 w-full lg:max-w-lg">
               <div className="mb-auto mt-auto max-w-lg">
                 <h1 className="text-5xl pb-8">Patrick J Auld</h1>
                 <AboutStatement />
