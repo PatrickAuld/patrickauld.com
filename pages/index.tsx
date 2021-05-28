@@ -13,7 +13,8 @@ function AboutStatement() {
   return (
     <div>
       <TextStatement>Currently, I'm a <b>Software Architect</b> at <a className="underline" href="https://construction.autodesk.com">Autodesk</a>.</TextStatement>
-      <TextStatement>Through <a className="underline" href="https://mandias.xyz">Mandias</a>, I offer <b>coaching or mentoring</b>.</TextStatement>
+      <TextStatement>Though <a className="underline" href="https://mandias.xyz">Mandias</a>, I offer <b>coaching or mentoring</b>.</TextStatement>
+      <TextStatement><a className="underline" href="https://patrickauld.substack.com">It Depends</a> is my <b>newsletter</b> on decision making.</TextStatement>
       <TextStatement>I moonlight as a <b>Futurist</b> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8">You can contact me though <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> and <a className="underline" href="https://twitter.com/patrickauld">Twitter</a>.</p>
     </div>
