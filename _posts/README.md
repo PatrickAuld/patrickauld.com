@@ -34,7 +34,7 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 
 **Continued learned is necessary for growth**. This includes things that may not seem directly related to my work activities. You can only discover new solutions when you broaden your understanding of the world.
 
-**Humans are the most expersive thing to change**. Any migration, tooling change, or modification has to take the human impact into account. This means always using simple abstractions and taking workflows into account when making changes.
+**Humans are the most expersive thing to change**. Any migration, workflow change, or modification has to take the human impact into account.
 
 **You can book any availablity on my calendar**. My focus time is blocked off. Open slot are that way so you can take advantage of them if you want to do a face to face.
 
