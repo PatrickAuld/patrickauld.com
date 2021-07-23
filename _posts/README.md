@@ -22,7 +22,7 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 
 **Feedback is always encouraged**. I welcome it. Please speak up about anything you feel the desire to. If you don't feel comfortable speaking up about something, please give feedback on that discomfort.
 
-**I am intentful with my time**. When time is set aside to focus or work, I mute all notifications to maintain that focus. This means I may not be immediately available or respond but during and after work hours.
+**I am intentful with my time**. When time is set aside to focus or work, I mute all notifications to maintain that focus. This means I may not be immediately available or respond during and after work hours.
 
 **I teach by asking leading questions**. Leaders are made by mentoring them to find their own way. This requires you to travel the journey to a solution, which may be different than my answer otherwise would have been!
 
@@ -31,6 +31,8 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 **Everything is an experiment**. Projects, features, ideas, anything we do starts with a hypothesis that may be wrong. I will advocate for canceling things that aren’t working. Sunk Costs are just lessons learned in how not to do something.
 
 **Continued learned is necessary for growth**. This includes things that may not seem directly related to my work activities. You can only discover new solutions when you broaden your understanding of the world.
+
+**Humans are the most expersive thing to change**. Any migration, tooling change, or modification has to take the human impact into account. This means always using simple abstractions and taking workflows into account when making changes.
 
 # Known Failures
 I can prematurely place too much trust in other’s abilities. This manifests itself in not providing enough proactive support and potentially putting people in situations where they need to stretch themselves more than expected.
