@@ -24,15 +24,19 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 
 **I am intentful with my time**. When time is set aside to focus or work, I mute all notifications to maintain that focus. This means I may not be immediately available or respond during and after work hours.
 
+**Problems are more important than solutions**. Expect me to drill into the problem you are solving and why it is a priority before implementation details. It's far more important to solve the right problem with an acceptable solution than the wrong one well.
+
 **I teach by asking leading questions**. Leaders are made by mentoring them to find their own way. This requires you to travel the journey to a solution, which may be different than my answer otherwise would have been!
 
 **My brainstorming is done in the open**. I may ask off-the-wall questions or present ideas that are half-baked (if that). This is exploratory and I likely want your expertise of input to guide my thought process.
 
-**Everything is an experiment**. Projects, features, ideas, anything we do starts with a hypothesis that may be wrong. I will advocate for canceling things that aren’t working. Sunk Costs are just lessons learned in how not to do something.
+**Everything is an experiment**. So treat them as such. Projects, features, ideas, anything we do starts with a hypothesis that may be wrong. I will advocate for canceling things that aren’t working, regardless of time spent on them. Sunk Costs are just lessons learned in how not to do something.
 
 **Continued learned is necessary for growth**. This includes things that may not seem directly related to my work activities. You can only discover new solutions when you broaden your understanding of the world.
 
 **Humans are the most expersive thing to change**. Any migration, tooling change, or modification has to take the human impact into account. This means always using simple abstractions and taking workflows into account when making changes.
+
+**You can book any availablity on my calendar**. My focus time is blocked off. Open slot are that way so you can take advantage of them if you want to do a face to face.
 
 # Known Failures
 I can prematurely place too much trust in other’s abilities. This manifests itself in not providing enough proactive support and potentially putting people in situations where they need to stretch themselves more than expected.
