@@ -9,7 +9,7 @@ author:
 Hello all! It takes time to understand new people. I’m no different. This guide is to help you know who I am and how I operate. It is and always will be a work in progress. You should assume what is written here is mostly correct. Feel free to test me on things and call me out when I diverge.
 
 # What I Value
-**Focus**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions.
+**Focus**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
 
 **Community and belonging** have been a focus of mine throughout my career. People work best when they know those around them support them. Making space to experiment and leave room for everyone to feel safe contributing is critical to our success.
 
