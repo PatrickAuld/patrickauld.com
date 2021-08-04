@@ -9,16 +9,18 @@ author:
 Hello all! It takes time to understand new people. I’m no different. This guide is to help you know who I am and how I operate. It is and always will be a work in progress. You should assume what is written here is mostly correct. Feel free to test me on things and call me out when I diverge.
 
 # What I Value
+**Storytelling is everying**. This is woven into everything we create. Understand what you are communicating otherwise the story falls flat.
+
 **Focus**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
 
-**Community and belonging** have been a focus of mine throughout my career. People work best when they know those around them support them. Making space to experiment and leave room for everyone to feel safe contributing is critical to our success.
-
-**Embrace failure in everything you do**. Nearly everything fails. When you plan for and expect failure and foster a culture of learning from them, you end up moving faster with smaller manageable failures.
+**Embrace failure in everything you do**. Nearly everything fails. When you plan for and expect failure and foster a culture of learning and iteration. You end up moving faster, learning more, with manageable failures.
 
 # How I work
 **I think in systems**. This means I see problems as a flow over multiple parts. Sometimes the flow is wrong and sometimes the parts are wrong.
 
 **What we do is a combination of I, We, and It**. How we are feeling, the relationships of those involved, and the work itself all interact day to day. In meetings, I may explicitly ask to check in on these.
+
+**Community and belonging** have been a focus of mine throughout my career. People work best when they know those around them support them. Making space to experiment and leave room for everyone to feel safe contributing is critical to our success.
 
 **Feedback is always encouraged**. I welcome it. Please speak up about anything you feel the desire to. If you don't feel comfortable speaking up about something, please give feedback on that discomfort.
 
