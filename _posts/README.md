@@ -13,7 +13,7 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 
 **Focus**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
 
-**Embrace failure in everything you do**. Nearly everything fails. When you plan for and expect failure and foster a culture of learning and iteration. You end up moving faster, learning more, with manageable failures.
+**Safety third**. Risk is required for progress. You are stronger when you plan for handling failures then assuming you can safely avoid them. You get to pick the top two priorities.
 
 # How I work
 **I think in systems**. This means I see problems as a flow over multiple parts. Sometimes the flow is wrong and sometimes the parts are wrong.
