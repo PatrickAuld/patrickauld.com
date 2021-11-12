@@ -11,7 +11,7 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 # What I Value
 **Storytelling is everying**. This is woven into everything we create. Understand what you are communicating otherwise the story falls flat.
 
-**Focus**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
+**Focus is prioritization**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
 
 **Safety third**. Risk is required for progress. You are stronger when you plan for handling failures then assuming you can safely avoid them. You get to pick the top two priorities.
 
