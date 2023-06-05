@@ -40,6 +40,8 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 
 **You can book any availablity on my calendar**. My focus time is blocked off. Open slot are that way so you can take advantage of them if you want to do a face to face.
 
+**Meetings have a five minutes pre-break**. When I own a meeting a starts at xx:05 or xx:35. I know your previous meeting didn't actually end fives minutes early like it was scheduled to. When you are in an office I know your last meeting room isn't the same as ours. A five minutes break is always built in so you can come relaxed and refreshed so we can make the most of the synchronous time we have.
+
 # Known Failures
 I can prematurely place too much trust in other’s abilities. This manifests itself in not providing enough proactive support and potentially putting people in situations where they need to stretch themselves more than expected.
 
