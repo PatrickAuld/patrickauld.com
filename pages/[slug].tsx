@@ -1,23 +1,23 @@
-import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
-import Container from '../components/container'
-import PostBody from '../components/post-body'
-import PostHeader from '../components/post-header'
-import Layout from '../components/layout'
-import { getPostBySlug, getAllPosts } from '../lib/api'
-import PostTitle from '../components/post-title'
-import PostType from '../types/post'
-import Head from 'next/head'
-import markdownToHtml from '../lib/markdownToHtml'
+import { useRouter } from "next/router";
+import ErrorPage from "next/error";
+import Container from "../components/container";
+import PostBody from "../components/post-body";
+import PostHeader from "../components/post-header";
+import Layout from "../components/layout";
+import { getPostBySlug, getAllPosts } from "../lib/api";
+import PostTitle from "../components/post-title";
+import PostType from "../types/post";
+import Head from "next/head";
+import markdownToHtml from "../lib/markdownToHtml";
 
 type Props = {
-  post: PostType
-}
+  post: PostType;
+};
 
 const Post = ({ post }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
   return (
     <Layout>
@@ -28,9 +28,7 @@ const Post = ({ post }: Props) => {
           <>
             <article className="mb-32">
               <Head>
-                <title>
-                  {post.title} | Patrick Auld
-                </title>
+                <title>{post.title} | Patrick Auld</title>
               </Head>
               <PostHeader title={post.title} />
               <PostBody content={post.content} />
@@ -39,25 +37,20 @@ const Post = ({ post }: Props) => {
         )}
       </Container>
     </Layout>
-  )
-}
+  );
+};
 
-
-export default Post
+export default Post;
 
 type Params = {
   params: {
-    slug: string
-  }
-}
+    slug: string;
+  };
+};
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'slug',
-    'content',
-  ])
-  const content = await markdownToHtml(post.content || '')
+  const post = getPostBySlug(params.slug, ["title", "slug", "content"]);
+  const content = await markdownToHtml(post.content || "");
 
   return {
     props: {
@@ -66,11 +59,11 @@ export async function getStaticProps({ params }: Params) {
         content,
       },
     },
-  }
+  };
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = getAllPosts(["slug"]);
 
   return {
     paths: posts.flatMap((post) => [
@@ -79,5 +72,5 @@ export async function getStaticPaths() {
       { params: { slug: post.slug.toUpperCase() } },
     ]),
     fallback: false,
-  }
+  };
 }
