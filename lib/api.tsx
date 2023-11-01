@@ -17,11 +17,17 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const { data, content } = matter(fileContents);
 
   const items: any = {};
+  const itemsLower: any = {};
+  const itemsUpper: any = {};
+  const itemsOriginal: any = {};
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === "slug") {
       items[field] = realSlug;
+      itemsLower[field] = realSlug.toLowerCase();
+      itemsUpper[field] = realSlug.toUpperCase();
+      itemsOriginal[field] = realSlug;
     }
     if (field === "content") {
       items[field] = content;
@@ -32,7 +38,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     }
   });
 
-  return items;
+  return [items, itemsLower, itemsUpper, itemsOriginal];
 }
 
 export function getAllPosts(fields: string[] = []) {
