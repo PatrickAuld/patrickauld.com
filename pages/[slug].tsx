@@ -52,7 +52,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const post = getPostBySlug(params.slug.toLowerCase(), [
     'title',
     'slug',
     'content',
@@ -76,7 +76,7 @@ export async function getStaticPaths() {
     paths: posts.map((posts) => {
       return {
         params: {
-          slug: posts.slug,
+          slug: posts.slug.toLowerCase(),
         },
       }
     }),
