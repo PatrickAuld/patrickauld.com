@@ -73,13 +73,11 @@ export async function getStaticPaths() {
   const posts = getAllPosts(['slug'])
 
   return {
-    paths: posts.map((posts) => {
-      return {
-        params: {
-          slug: posts.slug,
-        },
-      }
-    }),
+    paths: posts.flatMap((post) => [
+      { params: { slug: post.slug } },
+      { params: { slug: post.slug.toLowerCase() } },
+      { params: { slug: post.slug.toUpperCase() } },
+    ]),
     fallback: false,
   }
 }
