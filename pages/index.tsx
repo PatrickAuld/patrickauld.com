@@ -12,12 +12,12 @@ function TextStatement(props: { children: React.ReactNode }) {
 function AboutStatement() {
   return (
     <div>
-      <TextStatement>I'm a <b>Staff Engineer</b> at <a className="underline" href="https://flexport.com">Flexport</a>.</TextStatement>
+      <TextStatement>I'm working on <b>early stage prototypes</b> that are currently in stealth mode.</TextStatement>
       <TextStatement>Through <a className="underline" href="https://mandias.xyz">Mandias</a>, I offer <b>coaching or mentoring</b>.</TextStatement>
       <TextStatement><a className="underline" href="https://patrickauld.substack.com">It Depends</a> is my <b>newsletter</b> on decision making.</TextStatement>
       <TextStatement>I moonlight as a <b>Futurist</b> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       <TextStatement>You can read <b>how I work</b> on my <a className="underline" href="/README">Personal README</a>.</TextStatement>
-      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8">You can contact me though <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> and <a className="underline" href="https://twitter.com/patrickauld">Twitter</a>.</p>
+      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8">You can contact me though <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> and <a className="underline" href="https://x.com/patrickauld">X (Twitter)</a>.</p>
     </div>
   )
 }
