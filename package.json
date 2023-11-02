@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.9",
+    "autoprefixer": "^10.4.16",
     "date-fns": "^2.23.0",
     "gray-matter": "^4.0.3",
     "next": "12.2.1",
