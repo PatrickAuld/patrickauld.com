@@ -76,6 +76,39 @@ export async function getStaticPaths() {
     paths: posts.map((posts) => {
       return {
         params: {
+          slug: posts.slug.toLowerCase(),
+        },
+      }
+    }),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({ params }: Params) {
+  const post = getPostBySlug(params.slug.toLowerCase(), [
+    'title',
+    'slug',
+    'content',
+  ])
+  const content = await markdownToHtml(post.content || '')
+
+  return {
+    props: {
+      post: {
+        ...post,
+        content,
+      },
+    },
+  }
+}
+
+export async function getStaticPaths() {
+  const posts = getAllPosts(['slug'])
+
+  return {
+    paths: posts.map((posts) => {
+      return {
+        params: {
           slug: posts.slug,
         },
       }
