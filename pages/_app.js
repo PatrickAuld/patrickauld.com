@@ -16,6 +16,18 @@ const App = ({ Component, pageProps }) => {
     }
   }, [router.events])
 
+  useEffect(() => {
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const setBodyClass = (e) => {
+      document.body.classList[e.matches ? 'add' : 'remove']('dark');
+    };
+    setBodyClass(darkModeQuery);
+    darkModeQuery.addListener(setBodyClass);
+    return () => {
+      darkModeQuery.removeListener(setBodyClass);
+    };
+  }, []);
+
   return <Component {...pageProps} />
 }
 
