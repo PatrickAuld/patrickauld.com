@@ -5,7 +5,17 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'dark-mode': '#121212',
+      },
+      textColor: {
+        'dark-mode': '#f5f5f5',
+      },
+      linkColor: {
+        'dark-mode': '#bb86fc',
+      },
+    },
   },
   variants: {
     extend: {},
