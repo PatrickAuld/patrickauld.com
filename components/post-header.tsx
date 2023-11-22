@@ -1,10 +1,10 @@
 import PostTitle from './post-title'
 
-export default function PostHeader(props: { title: string }) {
+export default function PostHeader({ title }: { title: string }) {
   return (
     <>
       <div className="max-w-2xl mx-auto">
-        <PostTitle>{props.title}</PostTitle>
+        <PostTitle>{title}</PostTitle>
       </div>
     </>
   )
