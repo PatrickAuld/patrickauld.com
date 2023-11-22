@@ -1,6 +1,7 @@
+import { ReactNode } from 'react';
 import markdownStyles from './markdown-styles.module.css'
 
-export default function PostBody(props: { content: any }) {
+export default function PostBody({ content }: { content: ReactNode }) {
   return (
     <div className="max-w-2xl mx-auto">
       <div
