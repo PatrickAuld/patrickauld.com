@@ -1,5 +1,5 @@
-import { Props } from "react";
+import { ReactNode } from "react";
 
-export default function Container({ children }: any) {
+export default function Container({ children }: { children: ReactNode }) {
   return <div className="container mx-auto px-5">{children}</div>
 }
