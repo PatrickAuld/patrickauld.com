@@ -45,7 +45,7 @@ Hello all! It takes time to understand new people. I’m no different. This guid
 # Known Failures
 I can prematurely place too much trust in other’s abilities. This manifests itself in not providing enough proactive support and potentially putting people in situations where they need to stretch themselves more than expected.
 
-My written communication is terse. To some, this can be abrasive when that is not intended. (You won't miss when it is intended)
+My written communication is terse. To some, this can be abrasive when that is not intended. When I'm slower to respond I may be actively countering it.
 
-My memory isn't great. Especially with names. If I forget your name I am sorry. It's likely I can recite many other facts about you that still aren't useful in getting your attention or explaining to others who you are.
+I have a poor memory for people's names. If I forget your name, I am sorry. It's likely I can recite many other facts about you that still aren't useful in getting your attention or explaining to others who you are.
 
