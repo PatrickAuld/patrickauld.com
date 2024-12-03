@@ -16,8 +16,7 @@ function AboutStatement() {
       <TextStatement>I keep a <b>newsletter</b> on <a className="underline" href="https://patrickauld.substack.com">decision making.</a></TextStatement>
       <TextStatement>I moonlight as a <b>Futurist</b> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       
-      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8"><a className="underline" href="/README">Personal README</a></p>
-      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8"><a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> <a className="underline" href="https://x.com/patrickauld">X</a> <a className="underline" href="https://bsky.app/profile/patrickauld.com">bksy</a></p>
+      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8"><a className="underline" href="/README">Personal README</a> <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> <a className="underline" href="https://x.com/patrickauld">X</a> <a className="underline" href="https://bsky.app/profile/patrickauld.com">bksy</a></p>
     </div>
   )
 }
