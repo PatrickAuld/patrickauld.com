@@ -9,7 +9,6 @@ import PostTitle from '../components/post-title'
 import PostType from '../types/post'
 import Head from 'next/head'
 import markdownToHtml from '../lib/markdownToHtml'
-import ThemeToggle from '../components/theme-toggle'
 
 type Props = {
   post: PostType
@@ -27,9 +26,6 @@ const Post = ({ post }: Props) => {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <div className="absolute top-4 right-4 z-10">
-              <ThemeToggle />
-            </div>
             <article className="mb-32">
               <Head>
                 <title>
