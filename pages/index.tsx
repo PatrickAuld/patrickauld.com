@@ -16,7 +16,7 @@ function AboutStatement() {
       <TextStatement>I keep a <strong>newsletter</strong> on <a className="underline" href="https://patrickauld.substack.com">decision making.</a></TextStatement>
       <TextStatement>I moonlight as a <strong>Futurist</strong> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       
-      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8"><a className="underline" href="/README" aria-label="Read more about this website">README</a> <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> <a className="underline" href="https://x.com/patrickauld" aria-label="Patrick Auld on X/Twitter">X</a> <a className="underline" href="https://bsky.app/profile/patrickauld.com" aria-label="Patrick Auld on Bluesky">bksy</a></p>
+      <p className="mt-1 max-w-2xl text-base text-gray-700 pb-2 pt-8"><a className="underline" href="/README" aria-label="Personal README of the site author">README</a> <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> <a className="underline" href="https://x.com/patrickauld" aria-label="Patrick Auld on X/Twitter">X</a> <a className="underline" href="https://bsky.app/profile/patrickauld.com" aria-label="Patrick Auld on Bluesky">bksy</a></p>
     </div>
   )
 }
