@@ -29,7 +29,7 @@ export async function getServerSideProps() {
   const randomQuote =
     quotes.length > 0
       ? quotes[Math.floor(Math.random() * quotes.length)]
-      : { quote: "No quotes available.", attribution: "System" };
+      : { quote: "Done is Better than Perfect.", attribution: "Sheryl Sandberg" };
 
   return {
     props: {
