@@ -1,6 +1,5 @@
 .markdown {
-  @apply text-lg leading-relaxed;
-  color: #111827; /* gray-900 */
+  @apply text-lg leading-relaxed text-gray-900 dark:text-gray-100;
 }
 
 .markdown p,
@@ -11,14 +10,5 @@
 }
 
 .markdown h1 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
-  color: #111827; /* gray-900 */
-}
-
-:global(.dark) .markdown {
-  color: #f3f4f6; /* gray-100 */
-}
-
-:global(.dark) .markdown h1 {
-  color: #f3f4f6; /* gray-100 */
+  @apply text-3xl mt-12 mb-4 leading-snug text-gray-900 dark:text-gray-100;
 }
