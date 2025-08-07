@@ -24,13 +24,14 @@ async function getQuotesFromCSV(): Promise<Quote[]> {
   return quotes;
 }
 
-export async function getStaticProps() {
-  // Step 3: Call the function in getStaticProps
+export async function getServerSideProps() {
   const quotes = await getQuotesFromCSV();
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return {
     props: {
       quotes,
+      randomQuote,
     },
   };
 }
@@ -46,7 +47,7 @@ const Quote = ({quote, attribution}: Quote) => {
 }
 
 // Step 4: Use the data in your component
-export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
+export default function QuotesPage({ quotes, randomQuote }: { quotes: Quote[]; randomQuote: Quote }) {
   return (
     <Layout>
       <Container>
@@ -58,10 +59,14 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
               </Head>
               <PostHeader title="Quotes" />
               <div className="max-w-2xl mx-auto">
-                    {quotes.map((quote, index) => (
-                      <Quote quote={quote.quote} attribution={quote.attribution}/>
-                    ))}
-                  </div>
+                <div className="bg-gray-100 p-4 rounded-md mb-8">
+                  <h2 className="text-xl font-bold mb-2">Random Quote</h2>
+                  <Quote quote={randomQuote.quote} attribution={randomQuote.attribution} />
+                </div>
+                {quotes.map((quote, index) => (
+                  <Quote key={index} quote={quote.quote} attribution={quote.attribution}/>
+                ))}
+              </div>
             </article>
           </>
       </Container>
