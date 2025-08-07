@@ -26,7 +26,10 @@ async function getQuotesFromCSV(): Promise<Quote[]> {
 
 export async function getServerSideProps() {
   const quotes = await getQuotesFromCSV();
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const randomQuote =
+    quotes.length > 0
+      ? quotes[Math.floor(Math.random() * quotes.length)]
+      : { quote: "No quotes available.", attribution: "System" };
 
   return {
     props: {
