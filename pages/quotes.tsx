@@ -65,7 +65,6 @@ export default function QuotesPage({ quotes, randomQuote }: { quotes: Quote[]; r
               <PostHeader title="Quotes" />
               <div className="max-w-2xl mx-auto">
                 <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md mb-8">
-                  <h2 className="text-xl font-bold mb-2 dark:text-gray-200">Random Quote</h2>
                   <Quote quote={randomQuote.quote} attribution={randomQuote.attribution} />
                 </div>
                 {quotes.map((quote, index) => (
