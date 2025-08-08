@@ -26,10 +26,7 @@ async function getQuotesFromCSV(): Promise<Quote[]> {
 
 export async function getServerSideProps() {
   const quotes = await getQuotesFromCSV();
-  const randomQuote =
-    quotes.length > 0
-      ? quotes[Math.floor(Math.random() * quotes.length)]
-      : { quote: "Done is Better than Perfect.", attribution: "Sheryl Sandberg" };
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return {
     props: {
@@ -42,8 +39,8 @@ export async function getServerSideProps() {
 const Quote = ({quote, attribution}: Quote) => {
   return (
       <div>
-        <p className="mt-1 max-w-2xl text-lg text-gray-700 pb-2">{quote}</p>
-        <p className="mt-1 max-w-2xl text-md text-gray-700 pb-2">- {attribution || "Unknown"}</p>
+        <p className="mt-1 max-w-2xl text-lg text-gray-700 dark:text-gray-300 pb-2">{quote}</p>
+        <p className="mt-1 max-w-2xl text-md text-gray-700 dark:text-gray-400 pb-2">- {attribution || "Unknown"}</p>
       </div>
 
   )
@@ -62,8 +59,8 @@ export default function QuotesPage({ quotes, randomQuote }: { quotes: Quote[]; r
               </Head>
               <PostHeader title="Quotes" />
               <div className="max-w-2xl mx-auto">
-                <div className="bg-gray-100 p-4 rounded-md mb-8">
-                  <h2 className="text-xl font-bold mb-2">Random Quote</h2>
+                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md mb-8">
+                  <h2 className="text-xl font-bold mb-2 dark:text-gray-200">Random Quote</h2>
                   <Quote quote={randomQuote.quote} attribution={randomQuote.attribution} />
                 </div>
                 {quotes.map((quote, index) => (
