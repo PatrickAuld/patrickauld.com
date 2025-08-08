@@ -30,7 +30,7 @@ export async function getServerSideProps() {
   if (quotes.length > 0) {
     randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
   } else {
-    randomQuote = { quote: "No quotes available.", attribution: "Unknown" };
+    randomQuote = { quote: "Done is better than perfect.", attribution: "Sheryl Sandberg" };
   }
 
   return {
