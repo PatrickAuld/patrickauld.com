@@ -24,13 +24,19 @@ async function getQuotesFromCSV(): Promise<Quote[]> {
   return quotes;
 }
 
-export async function getStaticProps() {
-  // Step 3: Call the function in getStaticProps
+export async function getServerSideProps() {
   const quotes = await getQuotesFromCSV();
+  let randomQuote;
+  if (quotes.length > 0) {
+    randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  } else {
+    randomQuote = { quote: "Done is better than perfect.", attribution: "Sheryl Sandberg" };
+  }
 
   return {
     props: {
       quotes,
+      randomQuote,
     },
   };
 }
@@ -38,15 +44,15 @@ export async function getStaticProps() {
 const Quote = ({quote, attribution}: Quote) => {
   return (
       <div>
-        <p className="mt-1 max-w-2xl text-lg text-gray-700 pb-2">{quote}</p>
-        <p className="mt-1 max-w-2xl text-md text-gray-700 pb-2">- {attribution || "Unknown"}</p>
+        <p className="mt-1 max-w-2xl text-lg text-gray-700 dark:text-gray-300 pb-2">{quote}</p>
+        <p className="mt-1 max-w-2xl text-md text-gray-700 dark:text-gray-400 pb-2">- {attribution || "Unknown"}</p>
       </div>
 
   )
 }
 
 // Step 4: Use the data in your component
-export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
+export default function QuotesPage({ quotes, randomQuote }: { quotes: Quote[]; randomQuote: Quote }) {
   return (
     <Layout>
       <Container>
@@ -58,10 +64,13 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
               </Head>
               <PostHeader title="Quotes" />
               <div className="max-w-2xl mx-auto">
-                    {quotes.map((quote, index) => (
-                      <Quote quote={quote.quote} attribution={quote.attribution}/>
-                    ))}
-                  </div>
+                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md mb-8">
+                  <Quote quote={randomQuote.quote} attribution={randomQuote.attribution} />
+                </div>
+                {quotes.map((quote, index) => (
+                  <Quote key={index} quote={quote.quote} attribution={quote.attribution}/>
+                ))}
+              </div>
             </article>
           </>
       </Container>
