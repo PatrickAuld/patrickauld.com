@@ -37,7 +37,7 @@ export async function getStaticProps() {
 
 const Quote = ({quote, attribution}: Quote) => {
   return (
-    <div className="mb-8 p-6 border-l-4 border-teal-500 dark:border-teal-400">
+    <div className="mb-8 p-6 border-l-4 border-teal-400 dark:border-teal-700">
       <blockquote className="text-lg text-gray-800 dark:text-gray-100 italic leading-relaxed mb-3">
         "{quote}"
       </blockquote>
