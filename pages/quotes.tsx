@@ -37,11 +37,14 @@ export async function getStaticProps() {
 
 const Quote = ({quote, attribution}: Quote) => {
   return (
-      <div>
-        <p className="mt-1 max-w-2xl text-lg text-gray-700 dark:text-gray-300 pb-2">{quote}</p>
-        <p className="mt-1 max-w-2xl text-md text-gray-700 dark:text-gray-300 pb-2">- {attribution || "Unknown"}</p>
-      </div>
-
+    <div className="mb-8 p-6 border-l-4 border-teal-500 dark:border-teal-400">
+      <blockquote className="text-lg text-gray-800 dark:text-gray-100 italic leading-relaxed mb-3">
+        "{quote}"
+      </blockquote>
+      <cite className="text-sm text-gray-600 dark:text-gray-400 font-medium not-italic">
+        — {attribution || "Unknown"}
+      </cite>
+    </div>
   )
 }
 
@@ -57,11 +60,13 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
                 <title>Quotes</title>
               </Head>
               <PostHeader title="Quotes" />
-              <div className="max-w-2xl mx-auto">
-                    {quotes.map((quote, index) => (
-                      <Quote key={index} quote={quote.quote} attribution={quote.attribution}/>
-                    ))}
-                  </div>
+              <div className="max-w-4xl mx-auto">
+                <div className="space-y-6">
+                  {quotes.map((quote, index) => (
+                    <Quote key={index} quote={quote.quote} attribution={quote.attribution}/>
+                  ))}
+                </div>
+              </div>
             </article>
           </>
       </Container>
