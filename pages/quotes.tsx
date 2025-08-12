@@ -52,7 +52,7 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
       <Container>
         
           <>
-            <article className="mb-32">
+            <article>
               <Head>
                 <title>Quotes</title>
               </Head>
