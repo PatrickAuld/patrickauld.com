@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm :*)",
       "Bash(curl:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebFetch(domain:remark.js.org)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }

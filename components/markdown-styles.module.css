@@ -1,69 +1,134 @@
 .markdown {
-  @apply text-lg leading-relaxed text-gray-900 dark:text-gray-100;
+  @apply text-lg leading-relaxed;
 }
 
+/* Force text colors with higher specificity */
+.markdown,
 .markdown *,
 .markdown p,
 .markdown div,
 .markdown span,
 .markdown ul,
 .markdown ol,
-.markdown blockquote {
-  @apply my-6 text-gray-900 dark:text-gray-100;
+.markdown li,
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6,
+.markdown strong,
+.markdown b,
+.markdown em,
+.markdown i {
+  color: #111827 !important; /* gray-900 */
 }
 
+:global(.dark) .markdown,
+:global(.dark) .markdown *,
+:global(.dark) .markdown p,
+:global(.dark) .markdown div,
+:global(.dark) .markdown span,
+:global(.dark) .markdown ul,
+:global(.dark) .markdown ol,
+:global(.dark) .markdown li,
+:global(.dark) .markdown h1,
+:global(.dark) .markdown h2,
+:global(.dark) .markdown h3,
+:global(.dark) .markdown h4,
+:global(.dark) .markdown h5,
+:global(.dark) .markdown h6,
+:global(.dark) .markdown strong,
+:global(.dark) .markdown b,
+:global(.dark) .markdown em,
+:global(.dark) .markdown i {
+  color: #f3f4f6 !important; /* gray-100 */
+}
+
+/* Paragraph and list spacing */
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  @apply my-6;
+}
+
+/* Heading styles */
 .markdown h1 {
-  @apply text-3xl mt-12 mb-4 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-3xl mt-12 mb-4 leading-snug font-bold;
 }
 
 .markdown h2 {
-  @apply text-2xl mt-8 mb-4 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-2xl mt-8 mb-4 leading-snug font-bold;
 }
 
 .markdown h3 {
-  @apply text-xl mt-6 mb-3 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-xl mt-6 mb-3 leading-snug font-bold;
 }
 
 .markdown h4 {
-  @apply text-lg mt-4 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-lg mt-4 mb-2 leading-snug font-bold;
 }
 
 .markdown h5 {
-  @apply text-base mt-3 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-base mt-3 mb-2 leading-snug font-bold;
 }
 
 .markdown h6 {
-  @apply text-sm mt-2 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+  @apply text-sm mt-2 mb-2 leading-snug font-bold;
 }
 
+/* Text emphasis */
 .markdown strong,
 .markdown b {
-  @apply font-bold text-gray-900 dark:text-gray-100;
+  @apply font-bold;
 }
 
 .markdown em,
 .markdown i {
-  @apply italic text-gray-900 dark:text-gray-100;
+  @apply italic;
 }
 
+/* Links */
 .markdown a {
-  @apply text-blue-600 dark:text-blue-400 underline;
+  @apply underline;
+  color: #2563eb !important; /* blue-600 */
 }
 
-.markdown li {
-  @apply text-gray-900 dark:text-gray-100;
+:global(.dark) .markdown a {
+  color: #60a5fa !important; /* blue-400 */
 }
 
+/* Blockquotes */
 .markdown blockquote {
-  @apply border-l-4 border-gray-300 dark:border-gray-600 pl-4 text-gray-700 dark:text-gray-300;
+  @apply border-l-4 border-gray-300 pl-4;
+  color: #374151 !important; /* gray-700 */
 }
 
+:global(.dark) .markdown blockquote {
+  @apply border-gray-600;
+  color: #d1d5db !important; /* gray-300 */
+}
+
+/* Code */
 .markdown code {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-1 py-0.5 rounded text-sm;
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+  color: #111827 !important; /* gray-900 */
+}
+
+:global(.dark) .markdown code {
+  @apply bg-gray-800;
+  color: #f3f4f6 !important; /* gray-100 */
 }
 
 .markdown pre {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-4 rounded-lg overflow-x-auto;
+  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto;
+  color: #111827 !important; /* gray-900 */
+}
+
+:global(.dark) .markdown pre {
+  @apply bg-gray-800;
+  color: #f3f4f6 !important; /* gray-100 */
 }
 
 .markdown pre code {
