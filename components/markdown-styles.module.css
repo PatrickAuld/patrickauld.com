@@ -2,13 +2,70 @@
   @apply text-lg leading-relaxed text-gray-900 dark:text-gray-100;
 }
 
+.markdown *,
 .markdown p,
+.markdown div,
+.markdown span,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  @apply my-6 text-gray-900 dark:text-gray-100;
 }
 
 .markdown h1 {
   @apply text-3xl mt-12 mb-4 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown h2 {
+  @apply text-2xl mt-8 mb-4 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown h3 {
+  @apply text-xl mt-6 mb-3 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown h4 {
+  @apply text-lg mt-4 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown h5 {
+  @apply text-base mt-3 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown h6 {
+  @apply text-sm mt-2 mb-2 leading-snug text-gray-900 dark:text-gray-100;
+}
+
+.markdown strong,
+.markdown b {
+  @apply font-bold text-gray-900 dark:text-gray-100;
+}
+
+.markdown em,
+.markdown i {
+  @apply italic text-gray-900 dark:text-gray-100;
+}
+
+.markdown a {
+  @apply text-blue-600 dark:text-blue-400 underline;
+}
+
+.markdown li {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.markdown blockquote {
+  @apply border-l-4 border-gray-300 dark:border-gray-600 pl-4 text-gray-700 dark:text-gray-300;
+}
+
+.markdown code {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-1 py-0.5 rounded text-sm;
+}
+
+.markdown pre {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-4 rounded-lg overflow-x-auto;
+}
+
+.markdown pre code {
+  @apply bg-transparent p-0;
 }

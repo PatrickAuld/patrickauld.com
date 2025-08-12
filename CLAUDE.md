@@ -9,6 +9,7 @@ This is the personal website for Patrick Auld (patrickauld.com), built as a stat
 - **Content**: Markdown-based blog posts with gray-matter frontmatter
 - **Deployment**: Vercel
 - **Node.js**: v22.17.1 (LTS)
+- **Dependencies** : Yarn
 
 ## Key Features
 - Static site generation (SSG) with Next.js

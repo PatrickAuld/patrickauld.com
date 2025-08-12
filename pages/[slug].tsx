@@ -28,9 +28,7 @@ const Post = ({ post }: Props) => {
           <>
             <article className="mb-32">
               <Head>
-                <title>
-                  {post.title} | Patrick Auld
-                </title>
+                <title>{`${post.title} | Patrick Auld`}</title>
               </Head>
               <PostHeader title={post.title} />
               <PostBody content={post.content} />

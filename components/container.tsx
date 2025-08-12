@@ -1,5 +1,5 @@
 import { Props } from "react";
 
 export default function Container({ children }: any) {
-  return <div className="container mx-auto px-5 relative">{children}</div>
+  return <div className="container mx-auto px-5 pt-12 relative">{children}</div>
 }

@@ -1,4 +1,5 @@
 import Meta from './meta'
+import DarkModeToggle from './dark-mode-toggle'
 
 type Props = {
   preview?: boolean
@@ -10,7 +11,8 @@ const Layout = ({ preview, children }: Props) => {
     <>
       <Meta />
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
-        <main>{children}</main>
+        <DarkModeToggle />
+        <main className="w-full">{children}</main>
       </div>
     </>
   )
