@@ -36,7 +36,7 @@ export default function Home() {
             <div className="max-w-800 overflow-x-hidden">
               <Img width="800" height="800" className="w-auto h-auto object-center" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
             </div>
-            <div className="flex bg-gray-100 dark:bg-gray-800 p-10 w-full lg:max-w-lg">
+            <div className="flex bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
               <div className="mb-auto mt-auto max-w-lg">
                 <h1 className="text-5xl pb-8 text-gray-900 dark:text-gray-100">Patrick J Auld</h1>
                 <AboutStatement />
