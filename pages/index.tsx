@@ -17,7 +17,10 @@ function AboutStatement() {
       <TextStatement>I keep a <strong>newsletter</strong> on <a className="underline" href="https://patrickauld.substack.com">decision making.</a></TextStatement>
       <TextStatement>I moonlight as a <strong>Futurist</strong> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       
-      <p className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8"><a className="underline" href="/README" aria-label="Personal README of the site author">README</a> <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a> <a className="underline" href="https://x.com/patrickauld" aria-label="Patrick Auld on X/Twitter">X</a> <a className="underline" href="https://bsky.app/profile/patrickauld.com" aria-label="Patrick Auld on Bluesky">bksy</a></p>
+      <p className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8">
+        <a className="underline" href="/README" aria-label="Personal README of the site author">Personal README</a><br />
+        <a className="underline" href="/quotes" aria-label="Patrick Auld's quotes">Quotes I like</a>
+      </p>
     </div>
   )
 }
@@ -36,11 +39,19 @@ export default function Home() {
             <div className="max-w-800 overflow-x-hidden">
               <Img width="800" height="800" className="w-auto h-auto object-center" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
             </div>
-            <div className="flex bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
-              <div className="mb-auto mt-auto max-w-lg">
-                <h1 className="text-5xl pb-8 text-gray-900 dark:text-gray-100">Patrick J Auld</h1>
-                <AboutStatement />
+            <div className="flex flex-col h-full bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
+              <div className="flex-1 flex items-center">
+                <div className="max-w-lg">
+                  <h1 className="text-5xl pb-8 text-gray-900 dark:text-gray-100">Patrick J Auld</h1>
+                  <AboutStatement />
+                </div>
               </div>
+              <footer className="pt-6 text-base text-gray-700 dark:text-gray-300">
+                <div className="inline-flex items-center gap-4">
+                  <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a>
+                  <a className="underline" href="https://x.com/patrickauld" aria-label="Patrick Auld on X/Twitter">X</a>
+                </div>
+              </footer>
             </div>
           </div>
         </div>
