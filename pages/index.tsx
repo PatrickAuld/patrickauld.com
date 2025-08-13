@@ -35,9 +35,9 @@ export default function Home() {
 
       <main >
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 h-screen content-center">
-            <div className="max-w-800 overflow-x-hidden">
-              <Img width="800" height="800" className="w-auto h-auto object-center" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
+          <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen content-center">
+            <div className="flex items-center justify-center">
+              <Img width="800" height="800" className="w-full h-auto max-w-full object-cover" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
             </div>
             <div className="flex flex-col h-full bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
               <div className="flex-1 flex items-center">
