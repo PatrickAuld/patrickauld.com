@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Img from 'next/image'
 import Layout from '../components/layout'
+import Menu from '../components/menu'
 
 function TextStatement(props: { children: React.ReactNode }) {
   return (
@@ -36,11 +37,12 @@ export default function Home() {
             <div className="max-w-800 overflow-x-hidden">
               <Img width="800" height="800" className="w-auto h-auto object-center" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
             </div>
-            <div className="flex bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
+            <div className="relative flex bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
               <div className="mb-auto mt-auto max-w-lg">
                 <h1 className="text-5xl pb-8 text-gray-900 dark:text-gray-100">Patrick J Auld</h1>
                 <AboutStatement />
               </div>
+              <Menu />
             </div>
           </div>
         </div>
