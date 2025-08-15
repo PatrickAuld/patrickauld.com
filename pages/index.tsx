@@ -30,7 +30,6 @@ export default function Home() {
     <Layout>
       <Head>
         <title>Patrick J Auld</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main >
