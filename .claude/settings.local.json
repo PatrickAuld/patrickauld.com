@@ -5,7 +5,9 @@
       "Bash(curl:*)",
       "Bash(npm install:*)",
       "WebFetch(domain:remark.js.org)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(sips:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
