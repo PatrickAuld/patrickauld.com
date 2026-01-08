@@ -13,7 +13,7 @@ function TextStatement(props: { children: React.ReactNode }) {
 function AboutStatement() {
   return (
     <div>
-      <TextStatement>I'm a <strong>Staff Engineer</strong> at <a className="underline" href="https://patreon.com">Patreon</a>.</TextStatement>
+      <TextStatement>I'm a <strong>Principle Engineer</strong> at <a className="underline" href="https://roblox.com">Roblox</a>.</TextStatement>
       <TextStatement>I keep a <strong>newsletter</strong> on <a className="underline" href="https://patrickauld.substack.com">decision making.</a></TextStatement>
       <TextStatement>I moonlight as a <strong>Futurist</strong> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       
