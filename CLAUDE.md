@@ -4,11 +4,11 @@
 This is the personal website for Patrick Auld (patrickauld.com), built as a statically generated blog/portfolio site.
 
 ## Technology Stack
-- **Framework**: Next.js 15.4.1 with TypeScript
+- **Framework**: Next.js 16.1.1 with TypeScript
 - **Styling**: Tailwind CSS 3.4.4
 - **Content**: Markdown-based blog posts with gray-matter frontmatter
 - **Deployment**: Vercel
-- **Node.js**: v22.17.1 (LTS)
+- **Node.js**: v24.x (LTS)
 - **Dependencies** : Yarn
 
 ## Key Features
