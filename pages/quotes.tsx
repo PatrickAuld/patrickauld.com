@@ -71,7 +71,7 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
                 <title>Quotes</title>
               </Head>
               <PostHeader title="Quotes" />
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-2xl mx-auto">
                 {randomQuote && (
                   <div className="mb-12 text-center">
                     <blockquote className="text-2xl text-gray-800 dark:text-gray-100 italic leading-relaxed mb-4 font-medium">
