@@ -1,0 +1,21 @@
+name: Lighthouse CI
+on:
+  pull_request:
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Wait for Vercel Preview Deployment
+        uses: amygo/wait-for-vercel-preview-deployment@v1
+        id: vercel-deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: ${{ steps.vercel-deployment.outputs.url }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
