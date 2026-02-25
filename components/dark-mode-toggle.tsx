@@ -34,7 +34,7 @@ const DarkModeToggle = () => {
     <button
       type="button"
       onClick={toggleDarkMode}
-      className="fixed right-3 top-3 z-50 rounded-full border border-black/10 bg-white/70 px-2 py-1 text-xs text-gray-700 shadow-sm backdrop-blur transition hover:bg-white/90 dark:border-white/10 dark:bg-black/30 dark:text-gray-200 dark:hover:bg-black/40"
+      className="fixed right-3 top-3 z-50 rounded-full border border-black/10 bg-white/70 px-2 py-1 text-xs text-gray-700 shadow-sm backdrop-blur transition hover:bg-white/90 dark:border-white/10 dark:bg-black/20 dark:text-gray-100 dark:hover:bg-black/30"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
     >
