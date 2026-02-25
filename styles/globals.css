@@ -2,7 +2,7 @@
 
 /* Preserve the old site background colors across Tailwind upgrades.
    Light: white
-   Dark: olive-900 (#1F231F)
+   Dark: olive-900 (#1D2A10)
 */
 html,
 body {
@@ -11,5 +11,5 @@ body {
 
 html.dark,
 html.dark body {
-  background: #1f231f;
+  background: #1D2A10;
 }

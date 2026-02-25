@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         'olive': {
           800: '#262C26',
-          900: '#1F231F',
+          900: '#1D2A10',
         },
       },
     },
