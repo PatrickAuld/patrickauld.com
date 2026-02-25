@@ -22,9 +22,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
+        env:
+          NEXT_PUBLIC_ENABLE_ANALYTICS: "0"
         run: yarn build
 
       - name: Start server
+        env:
+          NEXT_PUBLIC_ENABLE_ANALYTICS: "0"
         run: |
           yarn start --port 3000 &
           echo $! > /tmp/next_pid
@@ -34,6 +38,10 @@ jobs:
 
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v12
+        env:
+          # Disable analytics scripts during Lighthouse runs to avoid skewing scores
+          # (and to prevent any non-Vercel 404 noise).
+          NEXT_PUBLIC_ENABLE_ANALYTICS: "0"
         with:
           urls: |
             http://127.0.0.1:3000/

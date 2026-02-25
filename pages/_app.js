@@ -5,6 +5,10 @@ import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import { Analytics } from '@vercel/analytics/react'
 
+const enableVercelAnalytics =
+  process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === '1' &&
+  Boolean(process.env.NEXT_PUBLIC_VERCEL_ENV)
+
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
   useEffect(() => {
@@ -20,7 +24,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <Component {...pageProps} />
-      <Analytics />
+      {enableVercelAnalytics ? <Analytics /> : null}
     </>
   )
 }
