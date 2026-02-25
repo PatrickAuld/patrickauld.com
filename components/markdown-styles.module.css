@@ -4,47 +4,9 @@
   @apply text-lg leading-relaxed;
 }
 
-/* Force text colors with higher specificity */
-.markdown,
-.markdown *,
-.markdown p,
-.markdown div,
-.markdown span,
-.markdown ul,
-.markdown ol,
-.markdown li,
-.markdown h1,
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6,
-.markdown strong,
-.markdown b,
-.markdown em,
-.markdown i {
-  color: #111827 !important; /* gray-900 */
-}
-
-:global(.dark) .markdown,
-:global(.dark) .markdown *,
-:global(.dark) .markdown p,
-:global(.dark) .markdown div,
-:global(.dark) .markdown span,
-:global(.dark) .markdown ul,
-:global(.dark) .markdown ol,
-:global(.dark) .markdown li,
-:global(.dark) .markdown h1,
-:global(.dark) .markdown h2,
-:global(.dark) .markdown h3,
-:global(.dark) .markdown h4,
-:global(.dark) .markdown h5,
-:global(.dark) .markdown h6,
-:global(.dark) .markdown strong,
-:global(.dark) .markdown b,
-:global(.dark) .markdown em,
-:global(.dark) .markdown i {
-  color: #f3f4f6 !important; /* gray-100 */
+/* Base text color should follow the theme without fighting Tailwind. */
+.markdown {
+  @apply text-gray-900 dark:text-gray-100;
 }
 
 /* Paragraph and list spacing */
@@ -93,44 +55,21 @@
 
 /* Links */
 .markdown a {
-  @apply underline;
-  color: #2563eb !important; /* blue-600 */
-}
-
-:global(.dark) .markdown a {
-  color: #60a5fa !important; /* blue-400 */
+  @apply underline text-blue-600 dark:text-blue-400;
 }
 
 /* Blockquotes */
 .markdown blockquote {
-  @apply border-l-4 border-gray-300 pl-4;
-  color: #374151 !important; /* gray-700 */
-}
-
-:global(.dark) .markdown blockquote {
-  @apply border-gray-600;
-  color: #d1d5db !important; /* gray-300 */
+  @apply border-l-4 border-gray-300 pl-4 text-gray-700 dark:border-gray-600 dark:text-gray-300;
 }
 
 /* Code */
 .markdown code {
-  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
-  color: #111827 !important; /* gray-900 */
-}
-
-:global(.dark) .markdown code {
-  @apply bg-gray-800;
-  color: #f3f4f6 !important; /* gray-100 */
+  @apply rounded bg-gray-100 px-1 py-0.5 text-sm text-gray-900 dark:bg-gray-800 dark:text-gray-100;
 }
 
 .markdown pre {
-  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto;
-  color: #111827 !important; /* gray-900 */
-}
-
-:global(.dark) .markdown pre {
-  @apply bg-gray-800;
-  color: #f3f4f6 !important; /* gray-100 */
+  @apply overflow-x-auto rounded-lg bg-gray-100 p-4 text-gray-900 dark:bg-gray-800 dark:text-gray-100;
 }
 
 .markdown pre code {
