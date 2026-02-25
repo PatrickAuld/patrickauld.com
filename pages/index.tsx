@@ -48,7 +48,8 @@ export default function Home() {
               <footer className="pt-6 text-base text-gray-700 dark:text-gray-300">
                 <div className="inline-flex items-center gap-4">
                   <a className="underline" href="mailto:patrick+homepage@patrickauld.com">email</a>
-                  <a className="underline" href="https://x.com/patrickauld" aria-label="Patrick Auld on X/Twitter">X</a>
+                  
+                  <a className="underline" href="https://www.linkedin.com/in/patrickauld" aria-label="Patrick Auld on LinkedIn">LinkedIn</a>
                 </div>
               </footer>
             </div>
