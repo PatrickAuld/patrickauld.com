@@ -1,33 +1,13 @@
 import Container from "../components/container";
 import Layout from "../components/layout";
-import fs from "fs";
-import path from "path";
-import Papa from "papaparse";
-import router from "next/router";
-import PostTitle from "../components/post-title";
 import Head from "next/head";
+import Link from "next/link";
 import PostHeader from "../components/post-header";
 import { useEffect, useState } from "react";
-
-interface Quote {
-  quote: string;
-  attribution: string;
-}
-
-async function getQuotesFromCSV(): Promise<Quote[]> {
-  const csvFilePath = path.join(process.cwd(), "public", "quotes.csv");
-  const csvFileContent = fs.readFileSync(csvFilePath, "utf8");
-  const { data } = Papa.parse(csvFileContent, { header: true });
-  const quotes: Quote[] = data.filter((row: any) => row.quote !== "").map((row: any) => ({
-    quote: row.quote,
-    attribution: row.attribution || "Unknown",
-  }));
-  return quotes;
-}
+import { getQuotesFromCSV, type QuoteRow } from "../lib/quotes";
 
 export async function getStaticProps() {
-  // Step 3: Call the function in getStaticProps
-  const quotes = await getQuotesFromCSV();
+  const quotes = getQuotesFromCSV();
 
   return {
     props: {
@@ -36,22 +16,29 @@ export async function getStaticProps() {
   };
 }
 
-const Quote = ({quote, attribution}: Quote) => {
+const QuoteCard = ({ id, quote, attribution }: QuoteRow) => {
   return (
-    <div className="mb-8 p-6 border-l-4 border-teal-400 dark:border-teal-700">
-      <blockquote className="text-lg text-gray-800 dark:text-gray-100 italic leading-relaxed mb-3">
-        "{quote}"
+    <div className="mb-8 border-l-4 border-teal-400 p-6 dark:border-teal-700">
+      <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
+        “{quote}”
       </blockquote>
-      <cite className="text-sm text-gray-600 dark:text-gray-400 font-medium not-italic">
-        — {attribution || "Unknown"}
-      </cite>
+      <div className="flex items-center justify-between gap-4">
+        <cite className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400">
+          — {attribution || "Unknown"}
+        </cite>
+        <Link
+          className="text-sm text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200"
+          href={`/quote/${id}`}
+        >
+          Link
+        </Link>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-// Step 4: Use the data in your component
-export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
-  const [randomQuote, setRandomQuote] = useState<Quote | null>(null);
+export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
+  const [randomQuote, setRandomQuote] = useState<QuoteRow | null>(null);
 
   useEffect(() => {
     // Select a random quote for the top of the page on client side
@@ -74,17 +61,30 @@ export default function QuotesPage({ quotes }: { quotes: Quote[] }) {
               <div className="max-w-2xl mx-auto">
                 {randomQuote && (
                   <div className="mb-12 text-center">
-                    <blockquote className="text-2xl text-gray-800 dark:text-gray-100 italic leading-relaxed mb-4 font-medium">
-                      "{randomQuote.quote}"
+                    <blockquote className="mb-4 text-2xl font-medium italic leading-relaxed text-gray-800 dark:text-gray-100">
+                      “{randomQuote.quote}”
                     </blockquote>
-                    <cite className="text-lg text-gray-600 dark:text-gray-300 font-semibold not-italic">
+                    <cite className="text-lg font-semibold not-italic text-gray-600 dark:text-gray-300">
                       — {randomQuote.attribution || "Unknown"}
                     </cite>
+                    <div className="mt-4">
+                      <Link
+                        className="text-sm text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200"
+                        href={`/quote/${randomQuote.id}`}
+                      >
+                        Link this quote
+                      </Link>
+                    </div>
                   </div>
                 )}
                 <div className="space-y-6">
-                  {quotes.map((quote, index) => (
-                    <Quote key={index} quote={quote.quote} attribution={quote.attribution}/>
+                  {quotes.map((q) => (
+                    <QuoteCard
+                      key={q.id}
+                      id={q.id}
+                      quote={q.quote}
+                      attribution={q.attribution}
+                    />
                   ))}
                 </div>
               </div>
