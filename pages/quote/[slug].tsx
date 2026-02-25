@@ -1,6 +1,6 @@
 import Container from "../../components/container";
 import Layout from "../../components/layout";
-import PostHeader from "../../components/post-header";
+// No title header on quote pages
 import Head from "next/head";
 import Link from "next/link";
 import { getQuotesFromCSV, getQuoteById, type QuoteRow } from "../../lib/quotes";
@@ -36,7 +36,7 @@ export async function getStaticProps({
 export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
   if (!quote) return null;
 
-  const title = "Quote";
+  const title = "Patrick J Auld";
   const description = `${quote.quote} — ${quote.attribution}`;
 
   return (
@@ -47,7 +47,6 @@ export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
             <title>{title}</title>
             <meta name="description" content={description} />
           </Head>
-          <PostHeader title="Quote" />
           <div className="mx-auto max-w-2xl">
             <div className="mb-8 p-6">
               <blockquote className="mb-3 text-2xl italic leading-relaxed text-gray-800 dark:text-gray-100">
