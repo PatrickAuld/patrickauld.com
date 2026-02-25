@@ -19,7 +19,7 @@ export async function getStaticProps() {
 const QuoteCard = ({ id, quote, attribution }: QuoteRow) => {
   return (
     <Link href={`/quote/${id}`} className="block">
-      <div className="mb-8 border-l-4 border-teal-400 p-6 dark:border-teal-700">
+      <div className="mb-8 p-6">
         <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
           “{quote}”
         </blockquote>
