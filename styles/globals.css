@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Preserve the old site background colors across Tailwind upgrades.
+   Light: white
+   Dark: olive-900 (#1F231F)
+*/
+html,
+body {
+  background: #ffffff;
+}
+
+html.dark,
+html.dark body {
+  background: #1f231f;
+}
