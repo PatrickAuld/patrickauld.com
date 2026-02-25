@@ -3,19 +3,28 @@ import Layout from "../../components/layout";
 import PostHeader from "../../components/post-header";
 import Head from "next/head";
 import Link from "next/link";
-import { getQuotesFromCSV, type QuoteRow } from "../../lib/quotes";
+import { getQuotesFromCSV, getQuoteById, type QuoteRow } from "../../lib/quotes";
+import { extractQuoteIdFromSlug, makeQuoteSlug } from "../../lib/quote-slug";
 
 export async function getStaticPaths() {
   const quotes = getQuotesFromCSV();
   return {
-    paths: quotes.map((q) => ({ params: { id: q.id } })),
+    paths: quotes.map((q) => ({
+      params: {
+        slug: makeQuoteSlug({ quote: q.quote, id: q.id, maxLen: 128 }),
+      },
+    })),
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }: { params: { id: string } }) {
-  const quotes = getQuotesFromCSV();
-  const quote = quotes.find((q) => q.id === params.id) ?? null;
+export async function getStaticProps({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const id = extractQuoteIdFromSlug(params.slug);
+  const quote = id ? getQuoteById(id) : null;
 
   return {
     props: {
