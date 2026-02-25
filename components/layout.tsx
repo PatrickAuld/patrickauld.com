@@ -10,7 +10,7 @@ const Layout = ({ preview, children }: Props) => {
   return (
     <>
       <Meta />
-      <div className="min-h-screen bg-white dark:bg-olive-900 transition-colors duration-200">
+      <div className="min-h-screen bg-white text-gray-900 dark:bg-olive-900 dark:text-gray-100 transition-colors duration-200">
         <DarkModeToggle />
         <main className="w-full">{children}</main>
       </div>
