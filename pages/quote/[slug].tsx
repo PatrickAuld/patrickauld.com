@@ -48,21 +48,23 @@ export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
             <meta name="description" content={description} />
           </Head>
           <div className="mx-auto max-w-2xl">
-            <div className="mb-8 p-6">
-              <blockquote className="mb-3 text-2xl italic leading-relaxed text-gray-800 dark:text-gray-100">
+            <div className="border-b border-neutral-200 pb-8">
+              <blockquote className="mb-4 text-3xl italic leading-relaxed text-gray-800 sm:text-4xl">
                 “{quote.quote}”
               </blockquote>
-              <cite className="text-base font-semibold not-italic text-gray-600 dark:text-gray-300">
+              <cite className="text-base font-semibold not-italic text-gray-600 sm:text-lg">
                 — {quote.attribution || "Unknown"}
               </cite>
             </div>
 
-            <Link
-              className="text-sm text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-teal-800 dark:text-teal-300 dark:hover:text-teal-200"
-              href="/quotes"
-            >
-              ← Back to all quotes
-            </Link>
+            <div className="pt-6">
+              <Link
+                className="text-sm text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-teal-800"
+                href="/quotes"
+              >
+                ← Back to all quotes
+              </Link>
+            </div>
           </div>
         </article>
       </Container>
