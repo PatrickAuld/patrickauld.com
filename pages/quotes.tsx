@@ -21,15 +21,13 @@ const QuoteCard = ({ id, quote, attribution }: QuoteRow) => {
   const slug = makeQuoteSlug({ quote, id, maxLen: 128 });
 
   return (
-    <Link href={`/quote/${slug}`} className="block">
-      <div className="mb-8 p-6">
-        <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
-          “{quote}”
-        </blockquote>
-        <cite className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400">
-          — {attribution || "Unknown"}
-        </cite>
-      </div>
+    <Link href={`/quote/${slug}`} className="block border-t border-neutral-200 py-6 first:border-t-0 first:pt-0 hover:opacity-80">
+      <blockquote className="mb-3 text-xl italic leading-relaxed text-gray-800 sm:text-2xl">
+        “{quote}”
+      </blockquote>
+      <cite className="text-sm font-medium not-italic text-gray-600">
+        — {attribution || "Unknown"}
+      </cite>
     </Link>
   );
 };
@@ -48,46 +46,41 @@ export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
   return (
     <Layout>
       <Container>
-        
-          <>
-            <article>
-              <Head>
-                <title>Quotes</title>
-              </Head>
-              <PostHeader title="Quotes" />
-              <div className="max-w-2xl mx-auto">
-                {randomQuote && (
-                  <Link
-                    href={`/quote/${makeQuoteSlug({
-                      quote: randomQuote.quote,
-                      id: randomQuote.id,
-                      maxLen: 128,
-                    })}`}
-                    className="block"
-                  >
-                    <div className="mb-12 cursor-pointer text-center">
-                      <blockquote className="mb-4 text-2xl font-medium italic leading-relaxed text-gray-800 dark:text-gray-100">
-                        “{randomQuote.quote}”
-                      </blockquote>
-                      <cite className="text-lg font-semibold not-italic text-gray-600 dark:text-gray-300">
-                        — {randomQuote.attribution || "Unknown"}
-                      </cite>
-                    </div>
-                  </Link>
-                )}
-                <div className="space-y-6">
-                  {quotes.map((q) => (
-                    <QuoteCard
-                      key={q.id}
-                      id={q.id}
-                      quote={q.quote}
-                      attribution={q.attribution}
-                    />
-                  ))}
-                </div>
-              </div>
-            </article>
-          </>
+        <article>
+          <Head>
+            <title>Quotes</title>
+          </Head>
+          <PostHeader title="Quotes" />
+          <div className="mx-auto max-w-2xl">
+            {randomQuote && (
+              <Link
+                href={`/quote/${makeQuoteSlug({
+                  quote: randomQuote.quote,
+                  id: randomQuote.id,
+                  maxLen: 128,
+                })}`}
+                className="block border-b border-neutral-200 pb-8 hover:opacity-80"
+              >
+                <blockquote className="mb-4 text-2xl italic leading-relaxed text-gray-800 sm:text-3xl">
+                  “{randomQuote.quote}”
+                </blockquote>
+                <cite className="text-base font-semibold not-italic text-gray-600 sm:text-lg">
+                  — {randomQuote.attribution || "Unknown"}
+                </cite>
+              </Link>
+            )}
+            <div className="pt-8">
+              {quotes.map((q) => (
+                <QuoteCard
+                  key={q.id}
+                  id={q.id}
+                  quote={q.quote}
+                  attribution={q.attribution}
+                />
+              ))}
+            </div>
+          </div>
+        </article>
       </Container>
     </Layout>
   );
