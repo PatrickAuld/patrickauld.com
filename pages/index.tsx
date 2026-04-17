@@ -19,7 +19,7 @@ function AboutStatement() {
       
       <p className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8">
         <a className="underline" href="/README" aria-label="Personal README of the site author">Personal README</a><br />
-        <a className="underline" href="/quotes" aria-label="Patrick Auld's quotes">Quotes I like</a>
+        <a className="underline" href="/quotes">Quotes I like</a>
       </p>
     </div>
   )
@@ -36,7 +36,15 @@ export default function Home() {
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen content-center">
             <div className="flex items-center justify-center">
-              <Img width="800" height="800" className="w-full h-auto max-w-full object-cover" src="/profile.jpeg" alt="Headshot of Patrick J Auld" />
+              <Img
+                width={800}
+                height={800}
+                className="w-full h-auto max-w-full object-cover"
+                src="/profile.jpeg"
+                alt="Headshot of Patrick J Auld"
+                priority
+                sizes="(max-width: 768px) 100vw, 412px"
+              />
             </div>
             <div className="flex flex-col h-full bg-gray-100 dark:bg-olive-800 p-10 w-full lg:max-w-lg">
               <div className="flex-1 flex items-center">

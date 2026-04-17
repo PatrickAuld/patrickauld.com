@@ -1,6 +1,9 @@
 import Head from 'next/head'
 
 export default function Meta() {
+  const description =
+    "Patrick J Auld — engineer at Roblox. Writing, decision making, and notes.";
+
   return (
     <Head>
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -9,6 +12,8 @@ export default function Meta() {
       <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
+
+      <meta name="description" content={description} />
     </Head>
-  )
+  );
 }
