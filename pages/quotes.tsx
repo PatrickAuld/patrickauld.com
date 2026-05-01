@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import Link from "next/link";
 import PostHeader from "../components/post-header";
+import QuoteAttribution from "../components/quote-attribution";
 import { useEffect, useState } from "react";
 import { getQuotesFromCSV, type QuoteRow } from "../lib/quotes";
 import { makeQuoteSlug } from "../lib/quote-slug";
@@ -17,29 +18,6 @@ export async function getStaticProps() {
   };
 }
 
-function QuoteAttributionLine({ quote }: { quote: QuoteRow }) {
-  const label = quote.attributionMeta?.label || quote.attribution || "Unknown";
-  const url = quote.attributionMeta?.url;
-
-  return (
-    <cite className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400">
-      — {url ? (
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          className="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
-          onClick={(event) => event.stopPropagation()}
-        >
-          {label}
-        </a>
-      ) : (
-        label
-      )}
-    </cite>
-  );
-}
-
 const QuoteCard = (quoteRow: QuoteRow) => {
   const { id, quote } = quoteRow;
   const slug = makeQuoteSlug({ quote, id, maxLen: 128 });
@@ -50,7 +28,11 @@ const QuoteCard = (quoteRow: QuoteRow) => {
         <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
           “{quote}”
         </blockquote>
-        <QuoteAttributionLine quote={quoteRow} />
+        <QuoteAttribution
+          quote={quoteRow}
+          className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400"
+          linkClassName="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+        />
       </div>
     </Link>
   );
@@ -91,9 +73,11 @@ export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
                       <blockquote className="mb-4 text-2xl font-medium italic leading-relaxed text-gray-800 dark:text-gray-100">
                         “{randomQuote.quote}”
                       </blockquote>
-                      <span className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                        <QuoteAttributionLine quote={randomQuote} />
-                      </span>
+                      <QuoteAttribution
+                        quote={randomQuote}
+                        className="text-lg font-semibold not-italic text-gray-600 dark:text-gray-300"
+                        linkClassName="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+                      />
                     </div>
                   </Link>
                 )}

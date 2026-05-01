@@ -3,30 +3,9 @@ import Layout from "../../components/layout";
 // No title header on quote pages
 import Head from "next/head";
 import Link from "next/link";
+import QuoteAttribution from "../../components/quote-attribution";
 import { getQuotesFromCSV, getQuoteById, type QuoteRow } from "../../lib/quotes";
 import { extractQuoteIdFromSlug, makeQuoteSlug } from "../../lib/quote-slug";
-
-function QuoteAttributionLine({ quote }: { quote: QuoteRow }) {
-  const label = quote.attributionMeta?.label || quote.attribution || "Unknown";
-  const url = quote.attributionMeta?.url;
-
-  return (
-    <cite className="text-base font-semibold not-italic text-gray-600 dark:text-gray-300">
-      — {url ? (
-        <a
-          href={url}
-          target="_blank"
-          rel="noreferrer"
-          className="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
-        >
-          {label}
-        </a>
-      ) : (
-        label
-      )}
-    </cite>
-  );
-}
 
 export async function getStaticPaths() {
   const quotes = getQuotesFromCSV();
@@ -74,7 +53,11 @@ export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
               <blockquote className="mb-3 text-2xl italic leading-relaxed text-gray-800 dark:text-gray-100">
                 “{quote.quote}”
               </blockquote>
-              <QuoteAttributionLine quote={quote} />
+              <QuoteAttribution
+                quote={quote}
+                className="text-base font-semibold not-italic text-gray-600 dark:text-gray-300"
+                linkClassName="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+              />
             </div>
 
             <Link

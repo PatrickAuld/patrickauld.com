@@ -12,7 +12,8 @@ export type QuoteRow = {
   id: string;
   quote: string;
   attribution: string;
-  attributionMeta?: QuoteAttribution;
+  attributionLink?: string;
+  attributionMeta: QuoteAttribution;
 };
 
 function makeQuoteId(quote: string, attribution: string): string {
@@ -24,17 +25,11 @@ function makeQuoteId(quote: string, attribution: string): string {
   return h.slice(0, 12);
 }
 
-function parseAttribution(attribution: string): QuoteAttribution {
-  const match = attribution.match(/^(.*?)\s+(https?:\/\/\S+)$/);
-  if (!match) {
-    return { label: attribution };
-  }
+function parseAttribution(attribution: string, attributionLink?: string): QuoteAttribution {
+  const label = attribution.trim() || "Unknown";
+  const url = attributionLink?.trim();
 
-  const [, label, url] = match;
-  return {
-    label: label.trim() || attribution,
-    url: url.trim(),
-  };
+  return url ? { label, url } : { label };
 }
 
 export function getQuotesFromCSV(): QuoteRow[] {
@@ -50,11 +45,13 @@ export function getQuotesFromCSV(): QuoteRow[] {
     .map((row) => {
       const quote = (row.quote ?? "").trim();
       const attribution = (row.attribution ?? "Unknown").trim() || "Unknown";
+      const attributionLink = (row.attributionLink ?? "").trim() || undefined;
       return {
         id: makeQuoteId(quote, attribution),
         quote,
         attribution,
-        attributionMeta: parseAttribution(attribution),
+        attributionLink,
+        attributionMeta: parseAttribution(attribution, attributionLink),
       };
     })
     .filter((q) => q.quote.length > 0);
