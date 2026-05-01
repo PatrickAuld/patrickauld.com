@@ -6,6 +6,28 @@ import Link from "next/link";
 import { getQuotesFromCSV, getQuoteById, type QuoteRow } from "../../lib/quotes";
 import { extractQuoteIdFromSlug, makeQuoteSlug } from "../../lib/quote-slug";
 
+function QuoteAttributionLine({ quote }: { quote: QuoteRow }) {
+  const label = quote.attributionMeta?.label || quote.attribution || "Unknown";
+  const url = quote.attributionMeta?.url;
+
+  return (
+    <cite className="text-base font-semibold not-italic text-gray-600 dark:text-gray-300">
+      — {url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+        >
+          {label}
+        </a>
+      ) : (
+        label
+      )}
+    </cite>
+  );
+}
+
 export async function getStaticPaths() {
   const quotes = getQuotesFromCSV();
   return {
@@ -52,9 +74,7 @@ export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
               <blockquote className="mb-3 text-2xl italic leading-relaxed text-gray-800 dark:text-gray-100">
                 “{quote.quote}”
               </blockquote>
-              <cite className="text-base font-semibold not-italic text-gray-600 dark:text-gray-300">
-                — {quote.attribution || "Unknown"}
-              </cite>
+              <QuoteAttributionLine quote={quote} />
             </div>
 
             <Link

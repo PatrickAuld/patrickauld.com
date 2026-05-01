@@ -17,7 +17,31 @@ export async function getStaticProps() {
   };
 }
 
-const QuoteCard = ({ id, quote, attribution }: QuoteRow) => {
+function QuoteAttributionLine({ quote }: { quote: QuoteRow }) {
+  const label = quote.attributionMeta?.label || quote.attribution || "Unknown";
+  const url = quote.attributionMeta?.url;
+
+  return (
+    <cite className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400">
+      — {url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+          onClick={(event) => event.stopPropagation()}
+        >
+          {label}
+        </a>
+      ) : (
+        label
+      )}
+    </cite>
+  );
+}
+
+const QuoteCard = (quoteRow: QuoteRow) => {
+  const { id, quote } = quoteRow;
   const slug = makeQuoteSlug({ quote, id, maxLen: 128 });
 
   return (
@@ -26,9 +50,7 @@ const QuoteCard = ({ id, quote, attribution }: QuoteRow) => {
         <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
           “{quote}”
         </blockquote>
-        <cite className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400">
-          — {attribution || "Unknown"}
-        </cite>
+        <QuoteAttributionLine quote={quoteRow} />
       </div>
     </Link>
   );
@@ -69,9 +91,9 @@ export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
                       <blockquote className="mb-4 text-2xl font-medium italic leading-relaxed text-gray-800 dark:text-gray-100">
                         “{randomQuote.quote}”
                       </blockquote>
-                      <cite className="text-lg font-semibold not-italic text-gray-600 dark:text-gray-300">
-                        — {randomQuote.attribution || "Unknown"}
-                      </cite>
+                      <span className="text-lg font-semibold text-gray-600 dark:text-gray-300">
+                        <QuoteAttributionLine quote={randomQuote} />
+                      </span>
                     </div>
                   </Link>
                 )}
