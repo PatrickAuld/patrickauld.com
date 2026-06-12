@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter()
@@ -21,6 +22,7 @@ const App = ({ Component, pageProps }) => {
     <>
       <Component {...pageProps} />
       <Analytics />
+      <SpeedInsights />
     </>
   )
 }
