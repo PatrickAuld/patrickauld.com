@@ -29,7 +29,7 @@ export async function getStaticProps({
 
   return {
     props: {
-      quote,
+      quote: quote ? JSON.parse(JSON.stringify(quote)) : null,
     },
   };
 }

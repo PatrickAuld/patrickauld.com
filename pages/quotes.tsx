@@ -13,7 +13,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      quotes,
+      quotes: JSON.parse(JSON.stringify(quotes)),
     },
   };
 }
@@ -83,12 +83,7 @@ export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
                 )}
                 <div className="space-y-6">
                   {quotes.map((q) => (
-                    <QuoteCard
-                      key={q.id}
-                      id={q.id}
-                      quote={q.quote}
-                      attribution={q.attribution}
-                    />
+                    <QuoteCard key={q.id} {...q} />
                   ))}
                 </div>
               </div>
