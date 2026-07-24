@@ -1,0 +1,168 @@
+name: PR Screenshots
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Determine changed routes
+        id: routes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          ROUTES=$(node scripts/changed-routes.mjs)
+          echo "Changed routes: $ROUTES"
+          echo "routes=$ROUTES" >> "$GITHUB_OUTPUT"
+          if [ "$ROUTES" = "[]" ]; then
+            echo "has_routes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_routes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install Playwright browsers
+        if: steps.routes.outputs.has_routes == 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Build site
+        if: steps.routes.outputs.has_routes == 'true'
+        run: yarn build
+
+      - name: Start site
+        if: steps.routes.outputs.has_routes == 'true'
+        run: |
+          yarn start -p 3300 &
+          for i in $(seq 1 30); do
+            if curl -sSf http://127.0.0.1:3300 > /dev/null 2>&1; then
+              echo "Server is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Server failed to start" >&2
+          exit 1
+
+      - name: Screenshot changed routes
+        if: steps.routes.outputs.has_routes == 'true'
+        env:
+          SCREENSHOT_BASE_URL: http://127.0.0.1:3300
+          ROUTES_JSON: ${{ steps.routes.outputs.routes }}
+        run: node scripts/screenshot-routes.mjs
+
+      - name: Commit screenshots to pr-screenshots branch
+        if: steps.routes.outputs.has_routes == 'true'
+        id: commit
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -e
+          BRANCH=pr-screenshots
+          SHA=$(git rev-parse --short HEAD)
+          DEST="pr-${PR_NUMBER}/${SHA}"
+          WT=$(mktemp -d)
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git worktree prune
+          git fetch origin "$BRANCH" 2>/dev/null || true
+
+          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null 2>&1; then
+            git worktree add -B "$BRANCH" "$WT" "origin/$BRANCH"
+          else
+            git worktree add --detach "$WT" HEAD
+            git -C "$WT" checkout --orphan "$BRANCH"
+            git -C "$WT" rm -rf . > /dev/null 2>&1 || true
+          fi
+
+          mkdir -p "$WT/$DEST"
+          cp .pr-screenshots/*.png "$WT/$DEST/" 2>/dev/null || true
+          cp .pr-screenshots/manifest.json "$WT/$DEST/" 2>/dev/null || true
+
+          git -C "$WT" add "$DEST"
+          if git -C "$WT" diff --cached --quiet; then
+            echo "No screenshots to commit"
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+          else
+            git -C "$WT" commit -m "Add PR #${PR_NUMBER} screenshots (${SHA})"
+            git -C "$WT" push origin "$BRANCH"
+            echo "committed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          git worktree remove --force "$WT"
+
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "dest=$DEST" >> "$GITHUB_OUTPUT"
+
+      - name: Comment screenshots on PR
+        if: steps.routes.outputs.has_routes == 'true' && steps.commit.outputs.committed == 'true'
+        uses: actions/github-script@v7
+        env:
+          BRANCH: ${{ steps.commit.outputs.branch }}
+          DEST: ${{ steps.commit.outputs.dest }}
+        with:
+          script: |
+            const fs = require('fs');
+
+            const manifestPath = '.pr-screenshots/manifest.json';
+            if (!fs.existsSync(manifestPath)) {
+              core.warning('No screenshot manifest found; skipping comment.');
+              return;
+            }
+
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const successful = manifest.filter((shot) => shot.file);
+
+            if (successful.length === 0) {
+              core.warning('No successful screenshots; skipping comment.');
+              return;
+            }
+
+            const branch = process.env.BRANCH;
+            const dest = process.env.DEST;
+            const sha = dest.split('/')[1];
+            const { owner, repo } = context.repo;
+            const marker = '<!-- pr-screenshots-bot -->';
+
+            const lines = [marker, '### 📸 Page screenshots', '', `Rendered at commit \`${sha}\`:`, ''];
+
+            for (const shot of successful) {
+              const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${dest}/${shot.file}`;
+              lines.push(`<details><summary><code>${shot.route}</code></summary>`, '', `![${shot.route}](${rawUrl})`, '', '</details>', '');
+            }
+
+            const body = lines.join('\n');
+
+            const comments = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+            const existing = comments.data.find((c) => c.body && c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number: context.issue.number, body });
+            }
