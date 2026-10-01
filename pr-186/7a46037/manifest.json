@@ -1,0 +1,22 @@
+[
+  {
+    "route": "/README",
+    "file": "README.png",
+    "status": 200
+  },
+  {
+    "route": "/quote/done-is-better-than-perfect-40aefc858588",
+    "file": "quote_done-is-better-than-perfect-40aefc858588.png",
+    "status": 200
+  },
+  {
+    "route": "/quotes",
+    "file": "quotes.png",
+    "status": 200
+  },
+  {
+    "route": "/",
+    "file": "home.png",
+    "status": 200
+  }
+]
