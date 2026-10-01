@@ -2,6 +2,7 @@
 
 .markdown {
   @apply text-lg leading-relaxed;
+  overflow-wrap: anywhere;
 }
 
 /* Force text colors with higher specificity */

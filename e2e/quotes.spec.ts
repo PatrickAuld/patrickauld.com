@@ -9,20 +9,44 @@ test.describe('Quotes page', () => {
 
   test('lists a known quote', async ({ page }) => {
     await page.goto('/quotes')
-    await expect(page.getByText('Done is better than perfect.')).toBeVisible()
+    await expect(page.getByText('Done is better than perfect.').first()).toBeVisible()
   })
 
-  test('fills the mobile viewport and uses the available width for quote cards', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 })
-    await page.goto('/quotes')
-    const pageSurface = page.locator('#__next > div').first()
-    const surfaceBox = await pageSurface.boundingBox()
-    expect(surfaceBox?.x).toBe(0)
-    expect(surfaceBox?.width).toBe(390)
-    const firstQuoteCard = page.locator('a[href^="/quote/"] blockquote').nth(1)
-    const box = await firstQuoteCard.boundingBox()
-    expect(box?.width).toBeGreaterThan(330)
-  })
+  for (const width of [320, 390, 430, 768, 1280]) {
+    for (const theme of ['light', 'dark']) {
+      test(`matches README layout at ${width}px in ${theme} mode`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 844 })
+        await page.addInitScript((theme) => localStorage.setItem('theme', theme), theme)
+        const measure = async () => page.locator('article').evaluate((article) => {
+          const heading = article.querySelector('h1')!
+          const content = article.children[1]
+          const paragraph = content.querySelector('p')!
+          const box = content.getBoundingClientRect()
+          return {
+            x: box.x,
+            width: box.width,
+            headingY: heading.getBoundingClientRect().y,
+            headingSize: getComputedStyle(heading).fontSize,
+            fontSize: getComputedStyle(paragraph).fontSize,
+            lineHeight: getComputedStyle(paragraph).lineHeight,
+            color: getComputedStyle(paragraph).color,
+            background: getComputedStyle(document.body).backgroundColor,
+          }
+        })
+        await page.goto('/README')
+        const readme = await measure()
+        await page.goto('/quotes')
+        expect(await measure()).toEqual(readme)
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width)
+        await expect(page.locator('a a')).toHaveCount(0)
+        const quoteLink = page.locator('blockquote a[href^="/quote/"]').first()
+        await quoteLink.click()
+        await expect(page).toHaveURL(/\/quote\//)
+        await expect.poll(measure).toEqual(readme)
+        expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width)
+      })
+    }
+  }
 
   test('navigates to a quote detail page', async ({ page }) => {
     await page.goto('/quotes')

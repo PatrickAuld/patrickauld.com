@@ -1,11 +1,8 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
-import Container from '../components/container'
+import ArticleLayout from '../components/article-layout'
 import PostBody from '../components/post-body'
-import PostHeader from '../components/post-header'
-import Layout from '../components/layout'
 import { getPostBySlug, getAllPosts } from '../lib/api'
-import PostTitle from '../components/post-title'
 import PostType from '../types/post'
 import Head from 'next/head'
 import markdownToHtml from '../lib/markdownToHtml'
@@ -20,23 +17,12 @@ const Post = ({ post }: Props) => {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout>
-      <Container>
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article>
-              <Head>
-                <title>{`${post.title} | Patrick Auld`}</title>
-              </Head>
-              <PostHeader title={post.title} />
-              <PostBody content={post.content} />
-            </article>
-          </>
-        )}
-      </Container>
-    </Layout>
+    <ArticleLayout title={router.isFallback ? 'Loading…' : post.title}>
+      <Head>
+        <title>{`${post.title} | Patrick Auld`}</title>
+      </Head>
+      {!router.isFallback && <PostBody content={post.content} />}
+    </ArticleLayout>
   )
 }
 

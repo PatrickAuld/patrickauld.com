@@ -1,12 +1,8 @@
-import Container from "../components/container";
-import Layout from "../components/layout";
+import ArticleLayout from "../components/article-layout";
+import QuoteContent from "../components/quote-content";
 import Head from "next/head";
-import Link from "next/link";
-import PostHeader from "../components/post-header";
-import QuoteAttribution from "../components/quote-attribution";
 import { useEffect, useState } from "react";
 import { getQuotesFromCSV, type QuoteRow } from "../lib/quotes";
-import { makeQuoteSlug } from "../lib/quote-slug";
 
 export async function getStaticProps() {
   const quotes = getQuotesFromCSV();
@@ -18,78 +14,22 @@ export async function getStaticProps() {
   };
 }
 
-const QuoteCard = (quoteRow: QuoteRow) => {
-  const { id, quote } = quoteRow;
-  const slug = makeQuoteSlug({ quote, id, maxLen: 128 });
-
-  return (
-    <Link href={`/quote/${slug}`} className="block">
-      <div className="mb-8 p-2 sm:p-6">
-        <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
-          “{quote}”
-        </blockquote>
-        <QuoteAttribution
-          quote={quoteRow}
-          className="text-sm font-medium not-italic text-gray-600 dark:text-gray-400"
-          linkClassName="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
-        />
-      </div>
-    </Link>
-  );
-};
-
 export default function QuotesPage({ quotes }: { quotes: QuoteRow[] }) {
   const [randomQuote, setRandomQuote] = useState<QuoteRow | null>(null);
 
   useEffect(() => {
-    // Select a random quote for the top of the page on client side
     if (quotes.length > 0) {
-      const selectedQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      setRandomQuote(selectedQuote);
+      setRandomQuote(quotes[Math.floor(Math.random() * quotes.length)]);
     }
   }, [quotes]);
 
   return (
-    <Layout>
-      <Container>
-        
-          <>
-            <article>
-              <Head>
-                <title>Quotes</title>
-              </Head>
-              <PostHeader title="Quotes" />
-              <div className="max-w-2xl mx-auto">
-                {randomQuote && (
-                  <Link
-                    href={`/quote/${makeQuoteSlug({
-                      quote: randomQuote.quote,
-                      id: randomQuote.id,
-                      maxLen: 128,
-                    })}`}
-                    className="block"
-                  >
-                    <div className="mb-12 cursor-pointer text-center">
-                      <blockquote className="mb-4 text-2xl font-medium italic leading-relaxed text-gray-800 dark:text-gray-100">
-                        “{randomQuote.quote}”
-                      </blockquote>
-                      <QuoteAttribution
-                        quote={randomQuote}
-                        className="text-lg font-semibold not-italic text-gray-600 dark:text-gray-300"
-                        linkClassName="underline decoration-teal-300 underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
-                      />
-                    </div>
-                  </Link>
-                )}
-                <div className="space-y-6">
-                  {quotes.map((q) => (
-                    <QuoteCard key={q.id} {...q} />
-                  ))}
-                </div>
-              </div>
-            </article>
-          </>
-      </Container>
-    </Layout>
+    <ArticleLayout title="Quotes">
+      <Head>
+        <title>Quotes</title>
+      </Head>
+      {randomQuote && <QuoteContent quote={randomQuote} linked />}
+      {quotes.map((quote) => <QuoteContent key={quote.id} quote={quote} linked />)}
+    </ArticleLayout>
   );
 }
