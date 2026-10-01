@@ -29,12 +29,12 @@ test.describe('Quotes page', () => {
     const firstCard = page.locator('a[href^="/quote/"]').first()
     const href = await firstCard.getAttribute('href')
     await firstCard.click()
-    await expect(page).toHaveURL((url) => url.pathname === href)
+    await expect(page).toHaveURL(new RegExp(href!.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + '$'))
     await expect(page.getByRole('link', { name: '← Back to all quotes' })).toBeVisible()
   })
 
   test('/quote redirects to /quotes', async ({ page }) => {
     await page.goto('/quote')
-    await expect(page).toHaveURL((url) => url.pathname === '/quotes')
+    await expect(page).toHaveURL(new RegExp('/quotes$'))
   })
 })
