@@ -24,7 +24,7 @@ const QuoteCard = (quoteRow: QuoteRow) => {
 
   return (
     <Link href={`/quote/${slug}`} className="block">
-      <div className="mb-8 p-6">
+      <div className="mb-8 p-2 sm:p-6">
         <blockquote className="mb-3 text-lg italic leading-relaxed text-gray-800 dark:text-gray-100">
           “{quote}”
         </blockquote>
