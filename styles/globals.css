@@ -1,9 +1,19 @@
 @import "tailwindcss";
+@config "../tailwind.config.js";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Preserve the old site background colors across Tailwind upgrades.
    Light: white
    Dark: olive-900 (#1D2A10)
 */
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 html,
 body {
   background: #ffffff;
