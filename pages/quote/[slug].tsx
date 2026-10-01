@@ -49,7 +49,7 @@ export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
             <meta name="description" content={description} />
           </Head>
           <div className="mx-auto max-w-2xl">
-            <div className="mb-8 p-6">
+            <div className="mb-8 p-2 sm:p-6">
               <blockquote className="mb-3 text-2xl italic leading-relaxed text-gray-800 dark:text-gray-100">
                 “{quote.quote}”
               </blockquote>
