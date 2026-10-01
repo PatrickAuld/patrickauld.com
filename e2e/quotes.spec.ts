@@ -12,6 +12,14 @@ test.describe('Quotes page', () => {
     await expect(page.getByText('Done is better than perfect.')).toBeVisible()
   })
 
+  test('uses the available width for quote cards on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('/quotes')
+    const firstQuoteCard = page.locator('a[href^="/quote/"] blockquote').nth(1)
+    const box = await firstQuoteCard.boundingBox()
+    expect(box?.width).toBeGreaterThan(330)
+  })
+
   test('navigates to a quote detail page', async ({ page }) => {
     await page.goto('/quotes')
     const firstCard = page.locator('a[href^="/quote/"]').first()
