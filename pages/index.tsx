@@ -19,7 +19,8 @@ function AboutStatement() {
       
       <p className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8">
         <a className="underline" href="/README" aria-label="Personal README of the site author">Personal README</a><br />
-        <a className="underline" href="/quotes" aria-label="Patrick Auld's quotes">Quotes I like</a>
+        <a className="underline" href="/quotes" aria-label="Patrick Auld's quotes">Quotes I like</a><br />
+        <a className="underline" href="/watches">Watches</a>
       </p>
     </div>
   )

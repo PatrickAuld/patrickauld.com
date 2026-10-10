@@ -1,0 +1,70 @@
+{
+  "name": "Crosshatch",
+  "assets": {
+    "crosshatch_ground": "crosshatch_ground.png",
+    "crosshatch_sector": "crosshatch_sector.png",
+    "crosshatch_reserve": "crosshatch_reserve.png",
+    "crosshatch_indices": "crosshatch_indices.png",
+    "crosshatch_gate": "crosshatch_gate.png",
+    "crosshatch_hour_shadow": "crosshatch_hour_shadow.png",
+    "crosshatch_hour": "crosshatch_hour.png",
+    "crosshatch_nib": "crosshatch_nib.png"
+  },
+  "strings": {
+    "watch_face_name": "Crosshatch",
+    "palette": "Ink",
+    "palette_scratchboard": "Scratchboard",
+    "palette_silverpoint": "Silverpoint",
+    "palette_sepia": "Sepia",
+    "palette_cyanotype": "Cyanotype",
+    "palette_vermilion": "Vermilion"
+  },
+  "themes": [
+    {
+      "id": "0",
+      "label": "Scratchboard",
+      "configuration": {
+        "palette": "scratchboard"
+      },
+      "background": "#000000",
+      "bezel": "#EDE4D3"
+    },
+    {
+      "id": "1",
+      "label": "Silverpoint",
+      "configuration": {
+        "palette": "silverpoint"
+      },
+      "background": "#000000",
+      "bezel": "#C8D2DC"
+    },
+    {
+      "id": "2",
+      "label": "Sepia",
+      "configuration": {
+        "palette": "sepia"
+      },
+      "background": "#000000",
+      "bezel": "#D8A66A"
+    },
+    {
+      "id": "3",
+      "label": "Cyanotype",
+      "configuration": {
+        "palette": "cyanotype"
+      },
+      "background": "#000000",
+      "bezel": "#73B9FF"
+    },
+    {
+      "id": "4",
+      "label": "Vermilion",
+      "configuration": {
+        "palette": "vermilion"
+      },
+      "background": "#000000",
+      "bezel": "#FF6A55"
+    }
+  ],
+  "sourceCommit": "2b051024fbc6a3440d905682e09c1bfa0be4d1ca"
+}

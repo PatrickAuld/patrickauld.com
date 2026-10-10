@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+  <Metadata key="CLOCK_TYPE" value="ANALOG" />
+  <Metadata key="PREVIEW_TIME" value="10:10:00" />
+  <UserConfigurations>
+    <ListConfiguration id="moire_style" displayName="moire_style" defaultValue="0">
+      <ListOption id="0" displayName="moire_pinwheel" />
+      <ListOption id="1" displayName="moire_petal" />
+      <ListOption id="2" displayName="moire_poles" />
+    </ListConfiguration>
+    <ColorConfiguration id="moire_palette" displayName="moire_palette" defaultValue="0">
+      <ColorOption id="0" displayName="palette_graphite" colors="#FFFCFAF5 #FF3B302C" />
+      <ColorOption id="1" displayName="palette_sepia" colors="#FFF4E7D5 #FF71463B" />
+      <ColorOption id="2" displayName="palette_atlantic" colors="#FFE7F1F4 #FF294B69" />
+      <ColorOption id="3" displayName="palette_plum" colors="#FFF3EAF0 #FF653F65" />
+    </ColorConfiguration>
+    <Flavors defaultValue="0">
+      <Flavor id="0" displayName="Beat Pinwheel">
+        <Configuration id="moire_style" optionId="0" />
+        <Configuration id="moire_palette" optionId="0" />
+      </Flavor>
+      <Flavor id="1" displayName="Opening Petals">
+        <Configuration id="moire_style" optionId="1" />
+        <Configuration id="moire_palette" optionId="0" />
+      </Flavor>
+      <Flavor id="2" displayName="Twin Poles">
+        <Configuration id="moire_style" optionId="2" />
+        <Configuration id="moire_palette" optionId="0" />
+      </Flavor>
+    </Flavors>
+  </UserConfigurations>
+  <Scene backgroundColor="#000000">
+    <Group x="0" y="0" width="450" height="450" name="paper">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <PartDraw x="0" y="0" width="450" height="450">
+        <Ellipse x="0" y="0" width="450" height="450"><Fill color="[CONFIGURATION.moire_palette.0]" /></Ellipse>
+      </PartDraw>
+    </Group>
+    <ListConfiguration id="moire_style">
+      <ListOption id="0">
+        <Group x="0" y="0" width="450" height="450" name="pinwheel_mechanism">
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+          <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="pinwheel_fixed" /></PartImage>
+          <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" name="pinwheel_moving_plate">
+            <Transform target="angle" value="([SECONDS_SINCE_EPOCH] % 180) * 2 + [MILLISECOND] * 0.002" />
+            <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="pinwheel_moving" /></PartImage>
+          </Group>
+        </Group>
+      </ListOption>
+      <ListOption id="1">
+        <Group x="0" y="0" width="450" height="450" name="petal_mechanism">
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+          <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="petal_fixed" /></PartImage>
+          <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" name="petal_moving_plate">
+            <Transform target="angle" value="([SECONDS_SINCE_EPOCH] % 20) * 3 + [MILLISECOND] * 0.003" />
+            <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="petal_moving" /></PartImage>
+          </Group>
+        </Group>
+      </ListOption>
+      <ListOption id="2">
+        <Group x="0" y="0" width="450" height="450" name="poles_mechanism">
+          <Variant mode="AMBIENT" target="alpha" value="0" />
+          <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="poles_fixed" /></PartImage>
+          <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" name="poles_moving_plate">
+            <Transform target="angle" value="([SECONDS_SINCE_EPOCH] % 180) * 2 + [MILLISECOND] * 0.002" />
+            <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="poles_moving" /></PartImage>
+          </Group>
+        </Group>
+      </ListOption>
+    </ListConfiguration>
+    <Group x="0" y="0" width="450" height="450" name="dial_furniture">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="dial_furniture" /></PartImage>
+    </Group>
+    <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" name="hour_hand">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Transform target="angle" value="([HOUR_0_23] % 12) * 30 + [MINUTE_SECOND] * 0.5" />
+      <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.0]"><Image resource="hour_fill" /></PartImage>
+      <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="hour_line" /></PartImage>
+    </Group>
+    <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" name="minute_hand">
+      <Variant mode="AMBIENT" target="alpha" value="0" />
+      <Transform target="angle" value="[MINUTE_SECOND] * 6" />
+      <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.0]"><Image resource="minute_fill" /></PartImage>
+      <PartImage x="0" y="0" width="450" height="450" tintColor="[CONFIGURATION.moire_palette.1]"><Image resource="minute_line" /></PartImage>
+    </Group>
+    <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" alpha="0" name="hour_ambient">
+      <Variant mode="AMBIENT" target="alpha" value="255" />
+      <Transform target="angle" value="([HOUR_0_23] % 12) * 30 + [MINUTE] * 0.5" />
+      <PartImage x="0" y="0" width="450" height="450"><Image resource="hour_ambient" /></PartImage>
+    </Group>
+    <Group x="0" y="0" width="450" height="450" pivotX="0.5" pivotY="0.5" alpha="0" name="minute_ambient">
+      <Variant mode="AMBIENT" target="alpha" value="255" />
+      <Transform target="angle" value="[MINUTE] * 6" />
+      <PartImage x="0" y="0" width="450" height="450"><Image resource="minute_ambient" /></PartImage>
+    </Group>
+    <PartDraw x="0" y="0" width="450" height="450">
+      <Ellipse x="219" y="219" width="12" height="12"><Fill color="[CONFIGURATION.moire_palette.1]" /></Ellipse>
+      <Ellipse x="223" y="223" width="4" height="4"><Fill color="[CONFIGURATION.moire_palette.0]" /></Ellipse>
+    </PartDraw>
+  </Scene>
+</WatchFace>
