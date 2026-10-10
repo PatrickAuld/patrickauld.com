@@ -1,0 +1,22 @@
+[
+  {
+    "route": "/watches",
+    "file": "watches.png",
+    "status": 200
+  },
+  {
+    "route": "/",
+    "file": "home.png",
+    "status": 200
+  },
+  {
+    "route": "/quotes",
+    "file": "quotes.png",
+    "status": 200
+  },
+  {
+    "route": "/README",
+    "file": "README.png",
+    "status": 200
+  }
+]
