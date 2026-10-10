@@ -8,7 +8,7 @@ These are my experiments in making time visible. I’m interested in what a scre
 
 ## Sundial II — time in the light
 
-![Sundial II: an ivory circular dial with a floating chord, unequal hour and minute endpoints, and a recessed rim.](/watches/sundial-ii.webp)
+<!-- watch-showcase {"face":"sundial-ii","mode":"day","time":"06:00","speed":1440} -->
 
 Two points mark the hour and minute. A chord connects them, and its shadow follows the Sun above Alameda, California. The result is a clock with two rhythms: the geometry tells the time, while the light gives the day its shape.
 
@@ -20,7 +20,7 @@ The location is fixed to Alameda. This is a small portrait of a place as much as
 
 ## Radial Moiré — motion between the lines
 
-![Radial Moiré: fine circular ink gratings produce broad interference bands beneath outlined watch hands.](/watches/radial-moire.webp)
+<!-- watch-showcase {"face":"radial-moire","mode":"live","cycleThemes":true,"themeInterval":8} -->
 
 Fine lines overlap. One plate turns beneath another, and a larger pattern emerges between them. The apparent movement belongs to the interference: a small rotation can send broad bands flowing around the dial.
 
@@ -32,7 +32,7 @@ A still image captures the engraving. The moving preview reveals the other half 
 
 ## Crosshatch — an approaching moment
 
-![Crosshatch: pale engraved lines on a black dial form a countdown wedge toward the next half hour.](/watches/crosshatch.webp)
+<!-- watch-showcase {"face":"crosshatch","mode":"fixed","time":"10:25"} -->
 
 Most watches tell you where you are in the hour. Crosshatch asks how close you are to the next beginning.
 
