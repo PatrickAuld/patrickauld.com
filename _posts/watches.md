@@ -42,6 +42,14 @@ It began with a practical question: could a glance make an upcoming meeting feel
 
 [Explore the Crosshatch draft →](https://patrickauld.github.io/watches/faces/crosshatch/)
 
+## SplitFlap — the board wakes up
+
+<!-- watch-showcase {"face":"split-flap","mode":"fixed","time":"10:08:30","wakeDelay":1,"wakeInterval":8} -->
+
+Small mechanical cells spell out the time. A shuffle runs across the whole board and settles on the time.
+
+[Explore SplitFlap →](https://patrickauld.github.io/watches/faces/split-flap/)
+
 ## An evolving collection
 
 These are selected designs, rather than a complete catalog. I’ll update this page as the work develops. The live gallery contains the current experiments and their customization controls; browser previews are simulations of the watch faces.

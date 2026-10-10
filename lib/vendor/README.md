@@ -5,3 +5,5 @@
 One local correction in `applyAttributes` preserves WFF's implicit base values when returning from an ambient Variant: alpha defaults to 255, scaleX/scaleY to 1, and other numeric targets to 0. Without this, faces with an ambient alpha Variant but no explicit normal alpha disappear in the normal display.
 
 The React showcase dynamically imports this module, loads the local XML/assets, and calls `renderWatchFace` once, followed by serialized `update` calls with explicit time, animation elapsed time, time zone, and configuration. Both epoch and civil-time sources follow the same simulated clock.
+
+Animated WebP decoding also accepts optional `<resource>-frames` and `<resource>-timing` assets when the browser lacks `ImageDecoder`. The frame atlas is a lossless copy of the original frames; timing JSON supplies columns, frame dimensions, and durations. SplitFlap includes these fallbacks.

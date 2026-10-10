@@ -2,6 +2,8 @@ export type ClockMode = 'live' | 'fixed' | 'day'
 
 export type ShowcaseOptions = {
   face: string
+  wakeDelay?: number
+  wakeInterval?: number
   mode?: ClockMode
   time?: string
   speed?: number
@@ -19,6 +21,7 @@ export type Theme = {
 }
 
 export type FaceManifest = {
+  wakeAnimationMs?: number
   name: string
   assets: Record<string, string>
   strings: Record<string, string>
@@ -82,6 +85,8 @@ export function parseShowcase(value: string): ShowcaseOptions {
   if (config.mode && !['live', 'fixed', 'day'].includes(config.mode)) throw new Error('Invalid showcase clock mode.')
   if (config.speed !== undefined && (!Number.isFinite(config.speed) || config.speed <= 0)) throw new Error('Invalid playback speed.')
   if (config.themeInterval !== undefined && (!Number.isFinite(config.themeInterval) || config.themeInterval < 2)) throw new Error('Theme intervals must be at least two seconds.')
+  if (config.wakeDelay !== undefined && (!Number.isFinite(config.wakeDelay) || config.wakeDelay < 0)) throw new Error('Wake delay must be nonnegative.')
+  if (config.wakeInterval !== undefined && (!Number.isFinite(config.wakeInterval) || config.wakeInterval < 2)) throw new Error('Wake intervals must be at least two seconds.')
   if (config.time !== undefined && !/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/.test(config.time)) throw new Error('Invalid showcase time.')
   if (config.timeZone) new Intl.DateTimeFormat('en-US', { timeZone: config.timeZone })
   return config

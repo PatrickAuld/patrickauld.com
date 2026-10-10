@@ -1,28 +1,25 @@
-import { CSSProperties, useEffect, useId, useMemo, useRef, useState } from 'react'
-import { Clock, ClockMode, FaceManifest, ShowcaseOptions, clockParts, clockTimestamp, dayBounds, zonedTimestamp } from '../lib/watch-showcase'
+import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
+import { Clock, FaceManifest, ShowcaseOptions, clockParts, clockTimestamp, dayBounds, zonedTimestamp } from '../lib/watch-showcase'
 import type { RenderResult } from '../lib/vendor/wff-web'
 import styles from './watch-showcase.module.css'
 
 type LoadedFace = { manifest: FaceManifest; xml: string; assets: Map<string, ArrayBuffer> }
 
-export default function WatchShowcase({ face, mode: initialMode = 'live', time = '10:10', speed: initialSpeed = 1440, cycleThemes = false, themeInterval = 8, timeZone = 'America/Los_Angeles' }: ShowcaseOptions) {
-  const id = useId()
+export default function WatchShowcase({ face, mode: initialMode = 'live', time = '10:10', speed: initialSpeed = 1440, cycleThemes = false, themeInterval = 8, timeZone = 'America/Los_Angeles', wakeDelay, wakeInterval }: ShowcaseOptions) {
   const root = useRef<HTMLElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
   const renderer = useRef<RenderResult | null>(null)
-  const clockRef = useRef<Clock | null>(null)
-  const clockVersion = useRef(0)
+  const replayPending = useRef(false)
+  const [replayStarted, setReplayStarted] = useState<number | null>(null)
   const [visible, setVisible] = useState(false)
   const [loaded, setLoaded] = useState<LoadedFace | null>(null)
   const [ready, setReady] = useState(false)
   const [error, setError] = useState('')
   const [date, setDate] = useState('')
   const [clock, setClock] = useState<Clock | null>(null)
-  const [readout, setReadout] = useState({ time: time.length === 5 ? `${time}:00` : time, timestamp: 0 })
   const [themeIndex, setThemeIndex] = useState(0)
   const [cycling, setCycling] = useState(cycleThemes)
-  const [interval, setIntervalSeconds] = useState(themeInterval)
-  const [ambient, setAmbient] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(true)
   const [pageVisible, setPageVisible] = useState(true)
   const bounds = useMemo(() => date ? dayBounds(date, timeZone) : [0, 86400000] as const, [date, timeZone])
   const theme = loaded?.manifest.themes[themeIndex]
@@ -34,7 +31,7 @@ export default function WatchShowcase({ face, mode: initialMode = 'live', time =
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     setDate(today)
     const initial = { mode: initialMode, timestamp: initialMode === 'live' ? now : zonedTimestamp(today, time, timeZone), anchor: now, speed: initialSpeed, paused: reducedMotion }
-    clockRef.current = initial
+    setReducedMotion(reducedMotion)
     setClock(initial)
     if (reducedMotion) setCycling(false)
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: '150px' })
@@ -75,8 +72,10 @@ export default function WatchShowcase({ face, mode: initialMode = 'live', time =
       result = await renderWatchFace(element, {
         xml: loaded.xml, assets: loaded.assets, strings: loaded.manifest.strings,
         width: 450, height: 450, time: new Date(zonedTimestamp(clockParts(Date.now(), timeZone).date, time, timeZone)),
-        timeZone, animate: false, ambientTransitionDurationMs: 0, configuration: loaded.manifest.themes[0]?.configuration,
+        timeZone, animate: false, elapsedMs: 0, ambientTransitionDurationMs: 0, configuration: loaded.manifest.themes[0]?.configuration,
       })
+      if (cancelled) { result.stop(); return }
+      if (loaded.manifest.wakeAnimationMs) await result.update({ elapsedMs: 5000 + performance.now() })
       if (cancelled) { result.stop(); return }
       renderer.current = result
       setReady(true)
@@ -89,77 +88,57 @@ export default function WatchShowcase({ face, mode: initialMode = 'live', time =
     let cancelled = false
     let frame = 0
     let lastFrame = -Infinity
-    let lastReadout = -Infinity
     const fps = face === 'sundial-ii' ? 12 : 30
     const draw = async (elapsed: number) => {
       if (cancelled) return
       if (elapsed - lastFrame < 1000 / fps) { frame = requestAnimationFrame(draw); return }
       lastFrame = elapsed
       const timestamp = clockTimestamp(clock, Date.now(), bounds)
-      const version = clockVersion.current
       try {
+        const animationElapsed = loaded?.manifest.wakeAnimationMs ? 5000 + performance.now() : timestamp - bounds[0]
+        if (replayPending.current) {
+          replayPending.current = false
+          await renderer.current?.update({ visible: false, elapsedMs: animationElapsed })
+        }
         await renderer.current?.update({
-          time: new Date(timestamp), elapsedMs: timestamp - bounds[0], ambient,
+          visible: true, time: new Date(timestamp), elapsedMs: animationElapsed,
           configuration: theme?.configuration,
         })
         canvas.current?.setAttribute('aria-label', `${loaded?.manifest.name ?? face} watch face`)
-        if (cancelled || version !== clockVersion.current) return
-        if (elapsed - lastReadout > 200 || clock.paused || clock.mode === 'fixed') {
-          const parts = clockParts(timestamp, timeZone)
-          setReadout({ ...parts, timestamp })
-          if (clock.mode === 'live' && !clock.paused) setDate(parts.date)
-          lastReadout = elapsed
-        }
-        if (!clock.paused && clock.mode !== 'fixed') frame = requestAnimationFrame(draw)
+        if (cancelled) return
+        if (clock.mode === 'live' && !clock.paused) setDate(clockParts(timestamp, timeZone).date)
+        const replaying = replayStarted !== null && performance.now() - replayStarted < (loaded?.manifest.wakeAnimationMs ?? 0)
+        if (replaying || (!clock.paused && clock.mode !== 'fixed')) frame = requestAnimationFrame(draw)
+        else if (replayStarted !== null) setReplayStarted(null)
       } catch (e) {
         if (!cancelled) setError(`Preview unavailable: ${e instanceof Error ? e.message : String(e)}`)
       }
     }
     frame = requestAnimationFrame(draw)
     return () => { cancelled = true; cancelAnimationFrame(frame) }
-  }, [ready, clock, active, bounds, ambient, theme, timeZone, face, loaded])
+  }, [ready, clock, active, bounds, theme, timeZone, face, loaded, replayStarted])
 
   useEffect(() => {
     if (!cycling || !active || !ready || !loaded || loaded.manifest.themes.length < 2) return
-    const timer = window.setInterval(() => setThemeIndex(i => (i + 1) % loaded.manifest.themes.length), interval * 1000)
+    const timer = window.setInterval(() => setThemeIndex(i => (i + 1) % loaded.manifest.themes.length), themeInterval * 1000)
     return () => window.clearInterval(timer)
-  }, [cycling, active, ready, loaded, interval])
+  }, [cycling, active, ready, loaded, themeInterval])
 
-  const updateClock = (changes: Partial<Clock>) => {
-    const previous = clockRef.current
-    if (!previous) return
-    const now = Date.now()
-    const next = { ...previous, timestamp: clockTimestamp(previous, now, bounds), anchor: now, ...changes }
-    clockVersion.current++
-    clockRef.current = next
-    setClock(next)
-    const timestamp = clockTimestamp(next, now, bounds)
-    setReadout({ ...clockParts(timestamp, timeZone), timestamp })
-    setError('')
-  }
-
-  const changeTime = (nextDate: string, nextTime: string) => {
-    if (!nextDate || !nextTime) return
-    try {
-      const timestamp = zonedTimestamp(nextDate, nextTime, timeZone)
-      setDate(nextDate)
-      updateClock({ timestamp, mode: clockRef.current?.mode === 'live' ? 'fixed' : clockRef.current?.mode, paused: true })
-    } catch (e) { setError(e instanceof Error ? e.message : String(e)) }
-  }
-
-  const changeMode = (mode: ClockMode) => {
-    const now = Date.now()
-    if (mode === 'live') setDate(clockParts(now, timeZone).date)
-    updateClock({ mode, timestamp: mode === 'live' ? now : clockRef.current ? clockTimestamp(clockRef.current, now, bounds) : now, paused: false })
-  }
+  useEffect(() => {
+    if (!active || !ready || reducedMotion || !loaded?.manifest.wakeAnimationMs || (wakeDelay === undefined && wakeInterval === undefined)) return
+    let repeat: number | undefined
+    const fire = () => { replayPending.current = true; setReplayStarted(performance.now()) }
+    const first = window.setTimeout(() => {
+      fire()
+      if (wakeInterval !== undefined) repeat = window.setInterval(fire, Math.max(wakeInterval * 1000, loaded.manifest.wakeAnimationMs! + 100))
+    }, (wakeDelay ?? wakeInterval ?? 0) * 1000)
+    return () => { window.clearTimeout(first); window.clearInterval(repeat) }
+  }, [active, ready, reducedMotion, loaded, wakeDelay, wakeInterval])
 
   const name = loaded?.manifest.name ?? face.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
   const stage = { '--stage': theme?.background ?? '#e5e6df', '--bezel': theme?.bezel ?? '#52615b' } as CSSProperties
-  const progress = readout.timestamp ? Math.max(0, Math.min((bounds[1] - bounds[0]) / 1000 - 1, (readout.timestamp - bounds[0]) / 1000)) : 0
-  const displayMode = !clock ? 'Loading preview' : clock.mode === 'fixed' ? 'Fixed time · motion frozen' : clock.paused ? 'Paused · motion frozen' : clock.mode === 'live' ? 'Current time' : `${clock.speed.toLocaleString()}× time · a day in ${Math.round((bounds[1] - bounds[0]) / clock.speed / 1000)} seconds`
-
   return (
-    <section ref={root} className={styles.showcase} aria-label={`${name} interactive showcase`} data-showcase={face}>
+    <section ref={root} className={styles.showcase} aria-label={`${name} showcase`} data-showcase={face} data-ready={ready} data-replaying={replayStarted !== null}>
       <div className={styles.stage} style={stage} data-testid="watch-stage">
         <div className={styles.bezel}>
           <img src={`/watches/${face}.webp`} alt={`${name} preview`} hidden={ready && !error} />
@@ -167,36 +146,9 @@ export default function WatchShowcase({ face, mode: initialMode = 'live', time =
         </div>
       </div>
       <div className={styles.title} aria-live="polite">{theme?.label ?? name}</div>
-      <p className={styles.note}>{cycling ? `Theme showcase · a different theme every ${interval} seconds.` : 'Selected theme.'} Theme changes also recolor the surrounding stage and bezel; they are separate from the watch’s own motion.</p>
+      {cycleThemes && loaded && loaded.manifest.themes.length > 1 ? <p className={styles.note}>Theme showcase · {theme?.label}. {reducedMotion ? 'Showing a still theme.' : `A different theme every ${themeInterval} seconds.`} Theme changes are separate from the watch’s own motion.</p> : null}
       {error ? <p className={styles.error} role="alert">{error} <a href={`https://patrickauld.github.io/watches/faces/${face}/`}>Open the live gallery</a></p> : null}
-      <fieldset disabled={!ready || !clock}>
-        <legend className="sr-only">{name} preview controls</legend>
-        <div className={styles.readout}>
-          <output aria-label="Displayed time">{readout.time}</output>
-          <span>{displayMode}</span>
-        </div>
-        <label htmlFor={`${id}-scrub`}>Scrub through the day</label>
-        <input id={`${id}-scrub`} className={styles.slider} type="range" min={0} max={(bounds[1] - bounds[0]) / 1000 - 1} step={1} value={progress} aria-valuetext={readout.time} onChange={e => updateClock({ timestamp: bounds[0] + Number(e.target.value) * 1000, mode: clock?.mode === 'day' ? 'day' : 'fixed', paused: true })} />
-        <div className={styles.controls}>
-          <label>Clock mode<select value={clock?.mode ?? initialMode} onChange={e => changeMode(e.target.value as ClockMode)}>
-            <option value="live">Current time</option><option value="fixed">Fixed time</option><option value="day">Day playback</option>
-          </select></label>
-          <button type="button" disabled={clock?.mode === 'fixed'} onClick={() => updateClock({ paused: !clock?.paused })}>{clock?.paused ? 'Play' : 'Pause'}</button>
-          <label>Set time<input type="time" step={1} value={readout.time} onChange={e => changeTime(date, e.target.value)} /></label>
-          <label>Date<input type="date" value={date} onChange={e => changeTime(e.target.value, readout.time)} /></label>
-          {clock?.mode === 'day' ? <label>Playback speed<select value={clock.speed} onChange={e => updateClock({ speed: Number(e.target.value) })}>{[...new Set([60, 360, 1440, 2880, initialSpeed])].sort((a, b) => a - b).map(value => <option key={value} value={value}>{value}×</option>)}</select></label> : null}
-        </div>
-        <p className={styles.note}>Clock location: {timeZone === 'America/Los_Angeles' ? 'Alameda, California (Pacific time)' : timeZone}. Scrubbing freezes the watch. Day playback resumes with Play; Current time returns to now.</p>
-        <div className={styles.controls}>
-          {loaded && loaded.manifest.themes.length > 1 ? <>
-            <label>Theme<select aria-label="Theme" value={themeIndex} onChange={e => { setThemeIndex(Number(e.target.value)); setCycling(false) }}>{loaded.manifest.themes.map((option, i) => <option key={option.id} value={i}>{option.label}</option>)}</select></label>
-            <label className={styles.check}><input type="checkbox" checked={cycling} onChange={e => setCycling(e.target.checked)} />Rotate themes</label>
-            <label>Theme interval<select value={interval} onChange={e => setIntervalSeconds(Number(e.target.value))}>{[...new Set([4, 8, 12, interval])].sort((a, b) => a - b).map(value => <option key={value} value={value}>{value} seconds</option>)}</select></label>
-          </> : null}
-          <label className={styles.check}><input type="checkbox" checked={ambient} onChange={e => setAmbient(e.target.checked)} />Ambient display</label>
-        </div>
-      </fieldset>
-      <p className={styles.note}>Interactive browser simulation.</p>
+      <p className={styles.note}>Browser simulation.</p>
     </section>
   )
 }
