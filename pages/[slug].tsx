@@ -4,8 +4,8 @@ import ArticleLayout from '../components/article-layout'
 import PostBody from '../components/post-body'
 import { getPostBySlug, getAllPosts } from '../lib/api'
 import PostType from '../types/post'
-import Head from 'next/head'
 import markdownToHtml from '../lib/markdownToHtml'
+import { SITE_DESCRIPTION } from '../lib/site'
 
 type Props = {
   post: PostType
@@ -17,10 +17,14 @@ const Post = ({ post }: Props) => {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <ArticleLayout title={router.isFallback ? 'Loading…' : post.title}>
-      <Head>
-        <title>{`${post.title} | Patrick Auld`}</title>
-      </Head>
+    <ArticleLayout title={router.isFallback ? 'Loading…' : post.title}
+      publishedTime={post.date} modifiedTime={post.updated}
+      meta={{
+        title: `${post.title} | Patrick Auld`,
+        description: post.description || SITE_DESCRIPTION,
+        path: `/${encodeURIComponent(post.slug)}`,
+        type: 'article', publishedTime: post.date, modifiedTime: post.updated,
+      }}>
       {!router.isFallback && <PostBody content={post.content} />}
     </ArticleLayout>
   )
@@ -40,6 +44,9 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'slug',
     'content',
+    'description',
+    'date',
+    'updated',
   ])
   const content = await markdownToHtml(post.content || '')
 

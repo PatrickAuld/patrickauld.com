@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test.describe('Quotes page', () => {
   test('has expected title and heading', async ({ page }) => {
     await page.goto('/quotes')
-    await expect(page).toHaveTitle('Quotes')
+    await expect(page).toHaveTitle('Quotes | Patrick Auld')
     await expect(page.getByRole('heading', { name: 'Quotes' })).toBeVisible()
   })
 

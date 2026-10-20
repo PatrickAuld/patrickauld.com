@@ -2,20 +2,23 @@
 title: 'README'
 coverImage: '/profile.jpeg'
 date: '2021-07-23T00:00:00.000Z'
+updated: '2026-10-20'
+description: 'How Patrick Auld works: values, systems thinking, feedback, mentoring, meetings, and known blind spots. A personal guide for colleagues and collaborators.'
 author:
   name: Patrick Auld
   picture: '/profile.jpeg'
 ---
-Hello all! It takes time to understand new people, and I’m no different. This guide is to help you understand who I am and how I operate. It is and always will be a work in progress. You should assume what is written here is mostly correct. Feel free to test me and call me out when I diverge.
+## How does Patrick Auld work?
+I start with the problem, think in systems, and treat ideas as experiments. I value storytelling, focus, community, and direct feedback. This personal README is a guide for colleagues and collaborators to my working style, expectations, and blind spots. It is always a work in progress. Feel free to test me and call me out when I diverge.
 
-# What I Value
+## What I Value
 **Storytelling is Everything**. The story is woven into everything we create. Understand what you are communicating; otherwise, the story falls flat.
 
 **Focus is Prioritization**. Being intentful with your time is critical to problem-solving. Get in the zone as much as possible. Eliminate distractions. Ruthlessly prioritize.
 
 **Safe Enough**. Risk is required for progress. Be aware of how much you can take on, its usually more than you think. You are stronger when you plan for handling failures then assuming you can safely avoid them.
 
-# How I work
+## How I work
 **Problems are more important than solutions**. Expect me to drill into the problem you are solving and why it is a priority before implementation details. It's far more important to solve the right problem with an acceptable solution than the wrong one well.
 
 **What we do is a combination of I, We, and It**. How we are feeling, the relationships of those involved, and the work itself all interact day to day. In meetings, I may explicitly ask to check in on these.
@@ -42,7 +45,7 @@ Hello all! It takes time to understand new people, and I’m no different. This 
 
 **Meetings have a five-minute pre-break**. When I own a meeting, it starts at xx:05 or xx:35. I know your previous meeting didn't end five minutes early like it was scheduled. When you are in an office, I know your last meeting room isn't the same as ours. A five-minute break is always built so you can come relaxed and refreshed so we can make the most of our synchronous time.
 
-# Known Failures
+## Known Failures
 I can prematurely place too much trust in other’s abilities. This manifests in not providing enough proactive support and potentially putting people in situations where they need to stretch themselves more than expected.
 
 My written communication is terse. It can be abrasive, even when that is not what I intended. When I'm slower to respond, I may be actively countering it.

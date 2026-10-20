@@ -1,6 +1,6 @@
-import Head from 'next/head'
 import Img from 'next/image'
 import Layout from '../components/layout'
+import { SITE_DESCRIPTION, siteUrl } from '../lib/site'
 
 function TextStatement(props: { children: React.ReactNode }) {
   return (
@@ -13,26 +13,41 @@ function TextStatement(props: { children: React.ReactNode }) {
 function AboutStatement() {
   return (
     <div>
-      <TextStatement>I'm a <strong>Principle Engineer</strong> at <a className="underline" href="https://roblox.com">Roblox</a>.</TextStatement>
+      <h2 className="text-2xl mb-4 text-gray-900 dark:text-gray-100">Who is Patrick Auld?</h2>
+      <TextStatement>I'm a <strong>Principal Engineer</strong> at <a className="underline" href="https://roblox.com">Roblox</a>.</TextStatement>
       <TextStatement>I keep a <strong>newsletter</strong> on <a className="underline" href="https://patrickauld.substack.com">decision making.</a></TextStatement>
       <TextStatement>I moonlight as a <strong>Futurist</strong> at <a className="underline" href="https://auldcellars.com">Auld Cellars</a>.</TextStatement>
       
-      <p className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8">
+      <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">Role as of <time dateTime="2026-10-20">October 20, 2026</time>.</p>
+      <nav aria-label="Main navigation" className="mt-1 max-w-2xl text-base text-gray-700 dark:text-gray-300 pb-2 pt-8">
         <a className="underline" href="/README" aria-label="Personal README of the site author">Personal README</a><br />
         <a className="underline" href="/quotes" aria-label="Patrick Auld's quotes">Quotes I like</a>
-      </p>
+      </nav>
     </div>
   )
 }
 
 export default function Home() {
   return (
-    <Layout>
-      <Head>
-        <title>Patrick J Auld</title>
-      </Head>
-
-      <main >
+    <Layout meta={{
+      structuredData: {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        url: siteUrl(),
+        name: 'Patrick J Auld',
+        description: SITE_DESCRIPTION,
+        mainEntity: {
+          '@type': 'Person',
+          '@id': siteUrl('/#patrick-auld'),
+          name: 'Patrick J Auld',
+          url: siteUrl(),
+          image: siteUrl('/profile.jpeg'),
+          jobTitle: 'Principal Engineer',
+          worksFor: { '@type': 'Organization', name: 'Roblox', url: 'https://roblox.com' },
+          sameAs: ['https://x.com/patrickauld', 'https://www.linkedin.com/in/patrickauld'],
+        },
+      },
+    }}>
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen content-center">
             <div className="flex items-center justify-center">
@@ -67,7 +82,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </main>
     </Layout>
   )
 }

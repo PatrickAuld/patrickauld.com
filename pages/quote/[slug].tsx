@@ -1,6 +1,5 @@
 import ArticleLayout from "../../components/article-layout";
 import QuoteContent from "../../components/quote-content";
-import Head from "next/head";
 import Link from "next/link";
 import { getQuotesFromCSV, getQuoteById, type QuoteRow } from "../../lib/quotes";
 import { extractQuoteIdFromSlug, makeQuoteSlug } from "../../lib/quote-slug";
@@ -24,6 +23,7 @@ export async function getStaticProps({
 }) {
   const id = extractQuoteIdFromSlug(params.slug);
   const quote = id ? getQuoteById(id) : null;
+  if (!quote) return { notFound: true };
 
   return {
     props: {
@@ -32,18 +32,16 @@ export async function getStaticProps({
   };
 }
 
-export default function QuotePage({ quote }: { quote: QuoteRow | null }) {
-  if (!quote) return null;
-
-  const title = "Patrick J Auld";
+export default function QuotePage({ quote }: { quote: QuoteRow }) {
+  const excerpt = quote.quote.length > 70 ? `${quote.quote.slice(0, 67).trimEnd()}…` : quote.quote;
+  const title = `“${excerpt}” — ${quote.attribution} | Patrick Auld`;
   const description = `${quote.quote} — ${quote.attribution}`;
 
   return (
-    <ArticleLayout title="Quotes">
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-      </Head>
+    <ArticleLayout title="Quotes" meta={{
+      title, description,
+      path: `/quote/${makeQuoteSlug({ quote: quote.quote, id: quote.id, maxLen: 128 })}`,
+    }}>
       <QuoteContent quote={quote} />
       <p><Link href="/quotes">← Back to all quotes</Link></p>
     </ArticleLayout>
