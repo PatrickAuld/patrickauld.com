@@ -1,0 +1,153 @@
+{
+  "name": "Radial Moir\u00e9",
+  "assets": {
+    "pinwheel_fixed": "pinwheel_fixed.png",
+    "pinwheel_moving": "pinwheel_moving.png",
+    "petal_fixed": "petal_fixed.png",
+    "petal_moving": "petal_moving.png",
+    "poles_fixed": "poles_fixed.png",
+    "poles_moving": "poles_moving.png",
+    "dial_furniture": "dial_furniture.png",
+    "hour_fill": "hour_fill.png",
+    "hour_line": "hour_line.png",
+    "minute_fill": "minute_fill.png",
+    "minute_line": "minute_line.png",
+    "hour_ambient": "hour_ambient.png",
+    "minute_ambient": "minute_ambient.png"
+  },
+  "strings": {
+    "watch_face_name": "Radial Moir\u00e9",
+    "moire_style": "Plate geometry",
+    "moire_pinwheel": "Beat pinwheel",
+    "moire_petal": "Opening petals",
+    "moire_poles": "Twin poles",
+    "moire_palette": "Dial palette",
+    "palette_graphite": "Graphite",
+    "palette_sepia": "Sepia",
+    "palette_atlantic": "Atlantic",
+    "palette_plum": "Plum"
+  },
+  "themes": [
+    {
+      "id": "0",
+      "label": "Beat pinwheel \u00b7 Graphite",
+      "configuration": {
+        "moire_style": "0",
+        "moire_palette": "0"
+      },
+      "background": "#FCFAF5",
+      "bezel": "#3B302C"
+    },
+    {
+      "id": "1",
+      "label": "Beat pinwheel \u00b7 Sepia",
+      "configuration": {
+        "moire_style": "0",
+        "moire_palette": "1"
+      },
+      "background": "#F4E7D5",
+      "bezel": "#71463B"
+    },
+    {
+      "id": "2",
+      "label": "Beat pinwheel \u00b7 Atlantic",
+      "configuration": {
+        "moire_style": "0",
+        "moire_palette": "2"
+      },
+      "background": "#E7F1F4",
+      "bezel": "#294B69"
+    },
+    {
+      "id": "3",
+      "label": "Beat pinwheel \u00b7 Plum",
+      "configuration": {
+        "moire_style": "0",
+        "moire_palette": "3"
+      },
+      "background": "#F3EAF0",
+      "bezel": "#653F65"
+    },
+    {
+      "id": "4",
+      "label": "Opening petals \u00b7 Graphite",
+      "configuration": {
+        "moire_style": "1",
+        "moire_palette": "0"
+      },
+      "background": "#FCFAF5",
+      "bezel": "#3B302C"
+    },
+    {
+      "id": "5",
+      "label": "Opening petals \u00b7 Sepia",
+      "configuration": {
+        "moire_style": "1",
+        "moire_palette": "1"
+      },
+      "background": "#F4E7D5",
+      "bezel": "#71463B"
+    },
+    {
+      "id": "6",
+      "label": "Opening petals \u00b7 Atlantic",
+      "configuration": {
+        "moire_style": "1",
+        "moire_palette": "2"
+      },
+      "background": "#E7F1F4",
+      "bezel": "#294B69"
+    },
+    {
+      "id": "7",
+      "label": "Opening petals \u00b7 Plum",
+      "configuration": {
+        "moire_style": "1",
+        "moire_palette": "3"
+      },
+      "background": "#F3EAF0",
+      "bezel": "#653F65"
+    },
+    {
+      "id": "8",
+      "label": "Twin poles \u00b7 Graphite",
+      "configuration": {
+        "moire_style": "2",
+        "moire_palette": "0"
+      },
+      "background": "#FCFAF5",
+      "bezel": "#3B302C"
+    },
+    {
+      "id": "9",
+      "label": "Twin poles \u00b7 Sepia",
+      "configuration": {
+        "moire_style": "2",
+        "moire_palette": "1"
+      },
+      "background": "#F4E7D5",
+      "bezel": "#71463B"
+    },
+    {
+      "id": "10",
+      "label": "Twin poles \u00b7 Atlantic",
+      "configuration": {
+        "moire_style": "2",
+        "moire_palette": "2"
+      },
+      "background": "#E7F1F4",
+      "bezel": "#294B69"
+    },
+    {
+      "id": "11",
+      "label": "Twin poles \u00b7 Plum",
+      "configuration": {
+        "moire_style": "2",
+        "moire_palette": "3"
+      },
+      "background": "#F3EAF0",
+      "bezel": "#653F65"
+    }
+  ],
+  "sourceCommit": "2b051024fbc6a3440d905682e09c1bfa0be4d1ca"
+}

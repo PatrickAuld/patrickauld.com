@@ -1,0 +1,31 @@
+{
+  "name": "Sundial II",
+  "assets": {},
+  "strings": {
+    "watch_face_name": "Sundial II",
+    "shadow_style": "Shadow geometry",
+    "shadow_line": "Floating line",
+    "shadow_wall": "Raised wall"
+  },
+  "themes": [
+    {
+      "id": "0",
+      "label": "Raised wall",
+      "configuration": {
+        "shadow_style": "1"
+      },
+      "background": "#e5e6df",
+      "bezel": "#52615b"
+    },
+    {
+      "id": "1",
+      "label": "Floating line",
+      "configuration": {
+        "shadow_style": "0"
+      },
+      "background": "#e5e6df",
+      "bezel": "#52615b"
+    }
+  ],
+  "sourceCommit": "2b051024fbc6a3440d905682e09c1bfa0be4d1ca"
+}

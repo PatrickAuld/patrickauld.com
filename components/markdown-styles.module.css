@@ -5,6 +5,14 @@
   overflow-wrap: anywhere;
 }
 
+.markdown img[src^="/watches/"] {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  margin: 2rem auto;
+}
+
 /* Force text colors with higher specificity */
 .markdown,
 .markdown *,

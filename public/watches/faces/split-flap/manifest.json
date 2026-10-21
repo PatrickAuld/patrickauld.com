@@ -1,0 +1,24 @@
+{
+  "name": "SplitFlap",
+  "assets": {
+    "board": "board.png",
+    "wake": "wake.webp",
+    "ripple": "ripple.webp",
+    "wake-frames": "wake-frames.webp",
+    "wake-timing": "wake-timing.json",
+    "ripple-frames": "ripple-frames.webp",
+    "ripple-timing": "ripple-timing.json"
+  },
+  "strings": {},
+  "themes": [
+    {
+      "id": "ivory",
+      "label": "SplitFlap \u00b7 Ivory station board",
+      "configuration": {},
+      "background": "#242529",
+      "bezel": "#47484c"
+    }
+  ],
+  "wakeAnimationMs": 1600,
+  "sourceCommit": "2b051024fbc6a3440d905682e09c1bfa0be4d1ca"
+}
